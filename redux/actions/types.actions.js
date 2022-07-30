@@ -1,1 +1,3 @@
-export const TEST_ACTION = 'TEST_ACTION'
+export const CATEGORIES = {
+  GET_CATEGORIES: 'GET_CATEGORIES',
+}

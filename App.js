@@ -1,5 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native'
 import BottomBar from './src/features/BottomBar/BottomBar'
 import { colors } from './src/utils/colors'
 import { Provider as PaperProvider } from 'react-native-paper'
@@ -10,43 +17,32 @@ import axios from 'axios'
 import env from './mld.config'
 import { TEST_ACTION } from './redux/actions/types.actions'
 import React, { useEffect } from 'react'
+import { spacing } from './src/utils/sizes'
 
 export default function App() {
-  const state = store.getState()
-  useEffect(() => {
-    if (!state.test || state.test.length === 0)
-      axios
-        .get(`${env.url}/api/redis/products`)
-        .then((res) => {
-          console.log(res.data)
-          store.dispatch({ type: TEST_ACTION, payload: res.data })
-        })
-        .catch((err) => console.log(err))
-  }, [])
-
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.title}</Text>
-      </View>
-    )
-  }
+  // useEffect(() => {
+  //   if (!state.test || state.test.length === 0) {
+  //     axios
+  //       .get(`${env.url}/api/redis/products`)
+  //       .then((res) => {
+  //         console.log(res.data)
+  //         store.dispatch({ type: TEST_ACTION, payload: res.data })
+  //       })
+  //       .catch((err) => console.log(err))
+  //   }
+  // }, [])
 
   return (
     <Provider store={store}>
       <PaperProvider>
         <NavigationContainer>
-          <View style={styles.container}>
-            <StatusBar style="auto" />
+          <StatusBar style="auto" />
+          <SafeAreaView style={styles.SafeAreaContainer}>
+            <ScrollView style={styles.ScrollContainer}>
+              <Text>hello</Text>
+            </ScrollView>
             <BottomBar />
-            {/* {store && (
-              <FlatList
-                renderItem={renderItem}
-                data={state ? state.test : []}
-                // keyExtractor={(item) => item.id}
-              />
-            )} */}
-          </View>
+          </SafeAreaView>
         </NavigationContainer>
       </PaperProvider>
     </Provider>
@@ -54,10 +50,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  SafeAreaContainer: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  ScrollContainer: {
+    flex: 1,
+    padding: spacing.m,
   },
 })

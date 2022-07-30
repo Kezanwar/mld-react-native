@@ -1,16 +1,13 @@
 import { StyleSheet, View } from 'react-native'
 import { colors } from '../../utils/colors'
-
 import React, { useState } from 'react'
-import { Button, IconButton } from 'react-native-paper'
+import { IconButton } from 'react-native-paper'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { connect } from 'react-redux'
-import { setTest } from '../../../redux/actions/test.actions'
 
 const BottomBar = (props) => {
   const [route, setRoute] = useState(false)
   const handleClick = (val) => {
-    console.log(props.test)
     setRoute(val)
   }
   return (
@@ -67,10 +64,6 @@ const styles = StyleSheet.create({
   container: {
     padding: spacing.sm,
     backgroundColor: colors.d_grey,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -88,12 +81,8 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = (state) => ({
-  test: state.test,
-})
+const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {
-  setTest,
-}
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomBar)
