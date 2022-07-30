@@ -4,11 +4,13 @@ import React, { useState } from 'react'
 import { IconButton } from 'react-native-paper'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { connect } from 'react-redux'
+import * as RootNavigation from '../../../RootNavigation'
 
 const BottomBar = (props) => {
   const [route, setRoute] = useState(false)
-  const handleClick = (val) => {
+  const handleClick = (val, screen) => {
     setRoute(val)
+    RootNavigation.navigate(screen)
   }
   return (
     <View style={styles.container}>
@@ -19,7 +21,7 @@ const BottomBar = (props) => {
         iconColor={colors.mld_red}
         style={styles.buttonStyles}
         // animated
-        onPress={() => handleClick(0)}
+        onPress={() => handleClick(0, 'Home')}
         icon={'home'}
         size={fontSizes.xl}
       />
@@ -30,7 +32,7 @@ const BottomBar = (props) => {
         iconColor={colors.mld_red}
         style={styles.buttonStyles}
         // animated
-        onPress={() => handleClick(1)}
+        onPress={() => handleClick(1, 'Search')}
         icon={'magnify'}
         size={fontSizes.xl}
       />
@@ -41,7 +43,7 @@ const BottomBar = (props) => {
         iconColor={colors.mld_red}
         style={styles.buttonStyles}
         // animated
-        onPress={() => handleClick(2)}
+        onPress={() => handleClick(2, 'Cart')}
         icon={'basket'}
         size={fontSizes.xl}
       />
@@ -52,7 +54,7 @@ const BottomBar = (props) => {
         iconColor={colors.mld_red}
         style={styles.buttonStyles}
         // animated
-        onPress={() => handleClick(3)}
+        onPress={() => handleClick(3, 'Profile')}
         icon={'account'}
         size={fontSizes.xl}
       />
