@@ -1,5 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native'
 import BottomBar from './src/containers/BottomBar/BottomBar'
 import { colors } from './src/utils/colors'
 import { Provider as PaperProvider } from 'react-native-paper'
@@ -7,11 +13,14 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import store from './redux/store'
 import { Provider } from 'react-redux'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { spacing } from './src/utils/sizes'
 import { navigationRef } from './RootNavigation'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
 
 const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 function HomeScreen() {
   return (
@@ -52,14 +61,39 @@ function ProfileScreen() {
 }
 
 export default function App() {
-  // console.log(<Stack.Screen name="Home" component={HomeScreen} />)
   return (
     <Provider store={store}>
       <PaperProvider>
         <StatusBar style="auto" />
-        {/* <SafeAreaView style={styles.SafeAreaContainer}> */}
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName="Home">
+          <Tab.Navigator
+            tabBar={(props) => {
+              // console.log(props)
+              return <BottomNavigation {...props} />
+            }}
+          >
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Search" component={SearchScreen} />
+            <Tab.Screen name="Cart" component={CartScreen} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
+  )
+}
+
+const styles = StyleSheet.create({
+  SafeAreaContainer: {
+    flex: 1,
+    padding: spacing.m,
+  },
+  ScrollContainer: {
+    flex: 1,
+  },
+})
+
+/* <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               options={{
                 headerShown: false,
@@ -87,22 +121,5 @@ export default function App() {
               }}
               name="Profile"
               component={ProfileScreen}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-        <BottomBar />
-        {/* </SafeAreaView> */}
-      </PaperProvider>
-    </Provider>
-  )
-}
-
-const styles = StyleSheet.create({
-  SafeAreaContainer: {
-    flex: 1,
-    padding: spacing.m,
-  },
-  ScrollContainer: {
-    flex: 1,
-  },
-})
+            /> */
+// /* </Stack.Navigator> }
