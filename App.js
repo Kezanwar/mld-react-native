@@ -6,11 +6,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native'
-import BottomBar from './src/containers/BottomBar/BottomBar'
-import { colors } from './src/utils/colors'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import React from 'react'
@@ -18,8 +15,8 @@ import { spacing } from './src/utils/sizes'
 import { navigationRef } from './RootNavigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
+import { ROUTE_KEYS } from './constants/constants'
 
-const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 function HomeScreen() {
@@ -68,14 +65,29 @@ export default function App() {
         <NavigationContainer ref={navigationRef}>
           <Tab.Navigator
             tabBar={(props) => {
-              // console.log(props)
               return <BottomNavigation {...props} />
             }}
           >
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Search" component={SearchScreen} />
-            <Tab.Screen name="Cart" component={CartScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.HOME}
+              component={HomeScreen}
+            />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.SEARCH}
+              component={SearchScreen}
+            />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.CART}
+              component={CartScreen}
+            />
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.PROFILE}
+              component={ProfileScreen}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </PaperProvider>
@@ -92,34 +104,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 })
-
-/* <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Home"
-              component={HomeScreen}
-            />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Search"
-              component={SearchScreen}
-            />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Cart"
-              component={CartScreen}
-            />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Profile"
-              component={ProfileScreen}
-            /> */
-// /* </Stack.Navigator> }
