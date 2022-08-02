@@ -1,17 +1,23 @@
 import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import BottomBar from './src/containers/BottomBar/BottomBar'
-import { colors } from './src/utils/colors'
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import store from './redux/store'
 import { Provider } from 'react-redux'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { spacing } from './src/utils/sizes'
 import { navigationRef } from './RootNavigation'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
+import { ROUTE_KEYS } from './constants/constants'
 
-const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 function HomeScreen() {
   return (
@@ -52,46 +58,38 @@ function ProfileScreen() {
 }
 
 export default function App() {
-  // console.log(<Stack.Screen name="Home" component={HomeScreen} />)
   return (
     <Provider store={store}>
       <PaperProvider>
         <StatusBar style="auto" />
-        {/* <SafeAreaView style={styles.SafeAreaContainer}> */}
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Home"
+          <Tab.Navigator
+            tabBar={(props) => {
+              return <BottomNavigation {...props} />
+            }}
+          >
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.HOME}
               component={HomeScreen}
             />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Search"
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.SEARCH}
               component={SearchScreen}
             />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Cart"
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.CART}
               component={CartScreen}
             />
-            <Stack.Screen
-              options={{
-                headerShown: false,
-              }}
-              name="Profile"
+            <Tab.Screen
+              options={{ headerShown: false }}
+              name={ROUTE_KEYS.PROFILE}
               component={ProfileScreen}
             />
-          </Stack.Navigator>
+          </Tab.Navigator>
         </NavigationContainer>
-        <BottomBar />
-        {/* </SafeAreaView> */}
       </PaperProvider>
     </Provider>
   )
