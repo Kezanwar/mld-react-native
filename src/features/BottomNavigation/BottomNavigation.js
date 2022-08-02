@@ -1,10 +1,11 @@
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { spacing, fontSizes } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
 import { IconButton } from 'react-native-paper'
 import { ROUTE_KEYS } from '../../../constants/constants'
+import { connect } from 'react-redux'
 
-const BottomNavigation = ({ state, descriptors, navigation }) => {
+const BottomNavigation = ({ state, descriptors, navigation, reduxState }) => {
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {
@@ -19,6 +20,7 @@ const BottomNavigation = ({ state, descriptors, navigation }) => {
         const isFocused = state.index === index
 
         const onPress = () => {
+          console.log(reduxState)
           const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
@@ -97,4 +99,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default BottomNavigation
+const mapDispatchToProps = {}
+
+const mapStateToProps = (state) => ({
+  reduxState: state,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BottomNavigation)
