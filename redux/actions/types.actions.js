@@ -1,3 +1,12 @@
 export const CATEGORIES = {
   GET_CATEGORIES: 'GET_CATEGORIES',
 }
+
+export const ROUTE = {
+  SET_ROUTE: 'SET_ROUTE',
+}
+
+export const CART = {
+  ADD_TO_CART: 'ADD_TO_CART',
+  REMOVE_FROM_CART: 'REMOVE_FROM_CART',
+}
