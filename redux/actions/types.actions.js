@@ -2,6 +2,10 @@ export const CATEGORIES = {
   GET_CATEGORIES: 'GET_CATEGORIES',
 }
 
+export const PRODUCTS = {
+  GET_PROD_BY_CAT: 'GET_PROD_BY_CAT',
+}
+
 export const ROUTE = {
   SET_ROUTE: 'SET_ROUTE',
 }

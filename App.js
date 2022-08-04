@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
-import store from './redux/store'
+import configureStore from './redux/store'
 import { Provider } from 'react-redux'
 import React from 'react'
 import { spacing } from './src/utils/sizes'
@@ -56,6 +56,8 @@ function ProfileScreen() {
     </View>
   )
 }
+
+const store = configureStore()
 
 export default function App() {
   return (
