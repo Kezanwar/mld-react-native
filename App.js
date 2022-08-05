@@ -16,35 +16,15 @@ import { navigationRef } from './RootNavigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
 import { ROUTE_KEYS } from './constants/constants'
+import HomeStackNavigator from './src/screens/HomeStack/HomeStackNavigator'
+import CartStackNavigator from './src/screens/CartStack/CartStackNavigator'
 
 const Tab = createBottomTabNavigator()
-
-function HomeScreen() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text>Home Screen</Text>
-    </View>
-  )
-}
 
 function SearchScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Search Screen</Text>
-    </View>
-  )
-}
-
-function CartScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Cart Screen</Text>
     </View>
   )
 }
@@ -73,7 +53,7 @@ export default function App() {
             <Tab.Screen
               options={{ headerShown: false }}
               name={ROUTE_KEYS.HOME}
-              component={HomeScreen}
+              component={HomeStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
@@ -83,7 +63,7 @@ export default function App() {
             <Tab.Screen
               options={{ headerShown: false }}
               name={ROUTE_KEYS.CART}
-              component={CartScreen}
+              component={CartStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
