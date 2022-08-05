@@ -1,108 +1,101 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { spacing, fontSizes } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
 import { IconButton, Text } from 'react-native-paper'
 import { ROUTE_KEYS } from '../../../constants/constants'
 import { connect } from 'react-redux'
-import { getCategories } from '../../../redux/actions/categories.actions'
+import { FlatList } from 'react-native'
 
-const BottomNavigation = ({
-  state,
-  descriptors,
-  navigation,
-  reduxState,
-  getCategories,
-}) => {
+const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
+  useEffect(() => {
+    console.log('hello')
+  }, [])
+
+  const TabItem = useCallback(({ item, index }) => {
+    const isFocused = state.index === index
+
+    const onPress = () => {
+      const event = navigation.emit({
+        type: 'tabPress',
+        target: item.key,
+        canPreventDefault: true,
+      })
+
+      if (!isFocused && !event.defaultPrevented) {
+        // The `merge: true` option makes sure that the params inside the tab screen are preserved
+        navigation.navigate({ name: item.name, merge: true })
+      }
+    }
+
+    const onLongPress = () => {
+      navigation.emit({
+        type: 'tabLongPress',
+        target: item.key,
+      })
+    }
+
+    let icon = ''
+    switch (item.name) {
+      case ROUTE_KEYS.HOME:
+        icon = 'home'
+        break
+      case ROUTE_KEYS.SEARCH:
+        icon = 'magnify'
+        break
+      case ROUTE_KEYS.CART:
+        icon = 'basket'
+        break
+      case ROUTE_KEYS.PROFILE:
+        icon = 'account'
+        break
+      default:
+        break
+    }
+
+    return (
+      <View key={item.key + index} style={styles.buttonWrapperStyles}>
+        <IconButton
+          accessibilityRole="button"
+          accessibilityState={isFocused ? { selected: true } : {}}
+          // accessibilityLabel={options.tabBarAccessibilityLabel}
+          color={isFocused ? colors.l_grey : colors.m_grey}
+          iconColor={colors.mld_red}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          icon={icon}
+          size={fontSizes.xl}
+        />
+        {item.name === ROUTE_KEYS.CART && (
+          <View style={styles.cartBadgeContainer}>
+            <Text style={styles.cartBadge}>{cart.length}</Text>
+          </View>
+        )}
+      </View>
+    )
+  })
+
   return useMemo(
     () => (
-      <View style={styles.container}>
-        {state.routes.map((route, index) => {
-          // const { options } = descriptors[route.key]
-          // const label =
-          //   options.tabBarLabel !== undefined
-          //     ? options.tabBarLabel
-          //     : options.title !== undefined
-          //     ? options.title
-          //     : route.name
-
-          const isFocused = state.index === index
-
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            })
-            getCategories('yesssss')
-            console.log(reduxState)
-
-            if (!isFocused && !event.defaultPrevented) {
-              // The `merge: true` option makes sure that the params inside the tab screen are preserved
-              navigation.navigate({ name: route.name, merge: true })
-            }
-          }
-
-          const onLongPress = () => {
-            navigation.emit({
-              type: 'tabLongPress',
-              target: route.key,
-            })
-          }
-
-          let icon = ''
-          switch (route.name) {
-            case ROUTE_KEYS.HOME:
-              icon = 'home'
-              break
-            case ROUTE_KEYS.SEARCH:
-              icon = 'magnify'
-              break
-            case ROUTE_KEYS.CART:
-              icon = 'basket'
-              break
-            case ROUTE_KEYS.PROFILE:
-              icon = 'account'
-              break
-            default:
-              break
-          }
-
-          return (
-            <View key={route.key + index} style={styles.buttonWrapperStyles}>
-              <IconButton
-                // testID={options.tabBarTestID}
-                accessibilityRole="button"
-                accessibilityState={isFocused ? { selected: true } : {}}
-                // accessibilityLabel={options.tabBarAccessibilityLabel}
-                color={isFocused ? colors.l_grey : colors.m_grey}
-                iconColor={colors.mld_red}
-                onPress={onPress}
-                onLongPress={onLongPress}
-                icon={icon}
-                size={fontSizes.xl}
-              />
-              {route.name === ROUTE_KEYS.CART && (
-                <View style={styles.cartBadgeContainer}>
-                  <Text style={styles.cartBadge}>0</Text>
-                </View>
-              )}
-            </View>
-          )
-        })}
+      <View>
+        <FlatList
+          contentContainerStyle={styles.contentWrapperContainer}
+          data={state.routes}
+          renderItem={TabItem}
+        />
       </View>
     ),
-    [reduxState, state]
+    [cart, state]
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentWrapperContainer: {
     padding: spacing.sm,
     backgroundColor: colors.d_grey,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderTopRightRadius: spacing.sm,
     borderTopLeftRadius: spacing.sm,
     shadowColor: '#3a3a3a',
@@ -115,6 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     position: 'relative',
+    flex: 0.2,
   },
   cartBadgeContainer: {
     position: 'absolute',
@@ -131,13 +125,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapDispatchToProps = {
-  getCategories,
-}
+const mapDispatchToProps = {}
 
 const mapStateToProps = (state) => ({
-  reduxState: state,
-  // swap this out for cart when we need it
+  cart: state.cart,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNavigation)
