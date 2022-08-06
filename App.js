@@ -18,6 +18,9 @@ import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
 import { ROUTE_KEYS } from './constants/constants'
 import HomeStackNavigator from './src/screens/HomeStack/HomeStackNavigator'
 import CartStackNavigator from './src/screens/CartStack/CartStackNavigator'
+import { colors } from './src/utils/colors'
+import { useFonts } from 'expo-font'
+import { fonts } from './src/utils/fonts'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,6 +43,19 @@ function ProfileScreen() {
 const store = configureStore()
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    [fonts.bold]: require('./assets/fonts/HelveticaNeueLTStd-Md.otf'),
+    [fonts.light]: require('./assets/fonts/HelveticaNeueLTStd-Lt.otf'),
+    [fonts.thin]: require('./assets/fonts/HelveticaNeueLTStd-Th.otf'),
+  })
+  if (!fontsLoaded) {
+    return (
+      <View>
+        <Text>Loading</Text>
+      </View>
+    )
+  }
+
   return (
     <Provider store={store}>
       <PaperProvider>

@@ -1,17 +1,14 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { spacing, fontSizes } from '../../utils/sizes'
-import { colors } from '../../utils/colors'
-import { IconButton, Text } from 'react-native-paper'
-import { ROUTE_KEYS } from '../../../constants/constants'
 import { connect } from 'react-redux'
 import { FlatList } from 'react-native'
+import { IconButton, Text } from 'react-native-paper'
+
+import { spacing, fontSizes } from '../../utils/sizes'
+import { colors } from '../../utils/colors'
+import { ROUTE_KEYS } from '../../../constants/constants'
 
 const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
-  useEffect(() => {
-    console.log('hello')
-  }, [])
-
   const TabItem = useCallback(({ item, index }) => {
     const isFocused = state.index === index
 
@@ -21,6 +18,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
         target: item.key,
         canPreventDefault: true,
       })
+      // alert(cart.length)
 
       if (!isFocused && !event.defaultPrevented) {
         // The `merge: true` option makes sure that the params inside the tab screen are preserved
@@ -91,7 +89,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
 
 const styles = StyleSheet.create({
   contentWrapperContainer: {
-    padding: spacing.sm,
+    padding: spacing.m,
     backgroundColor: colors.d_grey,
     flexDirection: 'row',
     alignItems: 'center',
