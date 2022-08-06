@@ -4,7 +4,6 @@ const initialState = []
 
 const cart = (state = initialState, action) => {
   const { type, payload } = action
-
   switch (type) {
     case CART.ADD_TO_CART: {
       return [...state, payload]
