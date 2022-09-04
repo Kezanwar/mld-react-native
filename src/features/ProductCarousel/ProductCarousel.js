@@ -46,6 +46,10 @@ const styles = StyleSheet.create({
   },
 })
 
-ProductCarousel.propTypes = {}
+ProductCarousel.propTypes = {
+  title: PropTypes.string,
+  products: PropTypes.arrayOf(PropTypes.object),
+  dimensions: PropTypes.object,
+}
 
 export default ProductCarousel

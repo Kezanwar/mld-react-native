@@ -80,4 +80,9 @@ const styles = StyleSheet.create({
   },
 })
 
+ProductCarouselCard.propTypes = {
+  prod: PropTypes.object,
+  dimensions: PropTypes.object,
+}
+
 export default ProductCarouselCard
