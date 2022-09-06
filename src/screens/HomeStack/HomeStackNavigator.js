@@ -6,10 +6,9 @@ import { getProdsByCategories } from '../../../redux/actions/products.actions'
 import { connect } from 'react-redux'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ROUTE_KEYS } from '../../../constants/constants'
-import { Button } from 'react-native-paper'
-import { spacing } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
 import ProductCarousel from '../../features/ProductCarousel/ProductCarousel'
+import ProductMasonryGrid from '../../features/ProductMasonryGrid/ProductMasonryGrid'
 
 const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
   const HomeStack = createNativeStackNavigator()
@@ -32,30 +31,11 @@ const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
             />
           )}
           {products && products.coffee && (
-            <ProductCarousel
-              dimensions={dimensions}
-              products={products.coffee.products}
+            <ProductMasonryGrid
               title={products.coffee.title}
+              products={products.coffee.products}
             />
           )}
-          {products && products.coffee && (
-            <ProductCarousel
-              dimensions={dimensions}
-              products={products.coffee.products}
-              title={products.coffee.title}
-            />
-          )}
-
-          <Button
-            onPress={() => {
-              addToCart({
-                title: 'hello',
-                price: `£${Math.random().toFixed(2)}`,
-              })
-            }}
-          >
-            add to cart
-          </Button>
         </ScrollView>
       </>
     )

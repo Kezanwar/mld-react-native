@@ -24,7 +24,7 @@ const ProductCarousel = ({ title, products, dimensions }) => {
 const styles = StyleSheet.create({
   carouselWrapper: {
     // flex: 0.7,
-    padding: spacing.m,
+    padding: 10,
     paddingTop: spacing.xxl,
     // marginBottom: spacing.sm,
   },
