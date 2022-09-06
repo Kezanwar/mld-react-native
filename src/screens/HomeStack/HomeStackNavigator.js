@@ -15,7 +15,10 @@ const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
 
   useEffect(() => {
     getProdsByCategories('coffee')
+    getProdsByCategories('spirits')
   }, [])
+
+  console.log(products)
 
   const dimensions = Dimensions.get('window')
 
@@ -30,10 +33,10 @@ const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
               title={products.coffee.title}
             />
           )}
-          {products && products.coffee && (
+          {products && products.spirits && (
             <ProductMasonryGrid
-              title={products.coffee.title}
-              products={products.coffee.products}
+              title={products.spirits.title}
+              products={products.spirits.products}
             />
           )}
         </ScrollView>
