@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts } from '../../utils/fonts'
 import PropTypes from 'prop-types'
-import { correctPrice } from '../../utils/prices'
+import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
@@ -23,19 +23,21 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
     else return {}
   }
 
-  const getPrices = () => {
-    if (price_range) {
-      return `£${correctPrice(price_range.min_amount)} - £${correctPrice(
-        price_range.max_amount
-      )}`
-    } else return `£${correctPrice(prices.price)}`
-  }
+  // const getPrices = () => {
+  //   if (price_range) {
+  //     return (
+  //       correctPriceWithCurrency(price_range.min_amount) +
+  //       ' - ' +
+  //       correctPriceWithCurrency(price_range.max_amount)
+  //     )
+  //   } else return correctPriceWithCurrency(prices.price)
+  // }
 
   const handleAddToCart = () => {
     addToCart({
       title: name,
       product_id: id,
-      price: `£${correctPrice(prices.price)}`,
+      price: correctPriceWithCurrency(prices.price),
     })
     if (addToCartButtonData.icon !== 'check-circle') {
       setAddToCartButtonData({
@@ -64,7 +66,7 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
       >
         {name}
       </Text>
-      <Text style={styles.price_range}>{getPrices()}</Text>
+      <Text style={styles.price_range}>{getPrices(prices, price_range)}</Text>
       <Button
         onPress={handleAddToCart}
         labelStyle={{
@@ -100,10 +102,12 @@ const styles = StyleSheet.create({
     marginRight: spacing.lg,
     padding: spacing.ml,
     borderRadius: spacing.sm,
-    shadowColor: '#171717',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    // shadowColor: '#171717',
+    // shadowOffset: { width: 0, height: 0 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3,
+    borderWidth: 1,
+    borderColor: colors.l_grey,
     justifyContent: 'space-between',
   },
   productImage: {
