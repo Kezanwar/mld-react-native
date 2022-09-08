@@ -33,7 +33,7 @@ const HomeStackNavigator = ({
 
   function HomeScreen(props) {
     const isFocused = useIsFocused()
-    console.log(`isFocused = ${isFocused}`)
+    console.log(`HomeScreen is focused = ${isFocused}`)
     return (
       <>
         <ScrollView contentContainerStyle={styles.screenWrapper}>
