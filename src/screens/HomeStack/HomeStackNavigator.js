@@ -9,13 +9,18 @@ import { ROUTE_KEYS } from '../../../constants/constants'
 import { colors } from '../../utils/colors'
 import ProductCarousel from '../../features/ProductCarousel/ProductCarousel'
 import ProductMasonryGrid from '../../features/ProductMasonryGrid/ProductMasonryGrid'
+import { Button } from 'react-native-paper'
 
 const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
   const HomeStack = createNativeStackNavigator()
 
   useEffect(() => {
     getProdsByCategories('coffee')
+    getProdsByCategories('spirits')
+    getProdsByCategories('award_winners')
   }, [])
+
+  console.log(products)
 
   const dimensions = Dimensions.get('window')
 
@@ -26,17 +31,28 @@ const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
           {products && products.coffee && (
             <ProductCarousel
               dimensions={dimensions}
-              products={products.coffee.products}
+              products={products.coffee.products.slice(12, 18)}
               title={products.coffee.title}
             />
           )}
-          {products && products.coffee && (
+          {products && products.spirits && (
             <ProductMasonryGrid
-              title={products.coffee.title}
-              products={products.coffee.products}
+              productData={{
+                ...products.spirits,
+                stackRoute: ROUTE_KEYS.HOME.category,
+                category: 'spirits',
+              }}
+            />
+          )}
+          {products && products.award_winners && (
+            <ProductCarousel
+              dimensions={dimensions}
+              products={products.award_winners.products.reverse().slice(0, 6)}
+              title={products.award_winners.title}
             />
           )}
         </ScrollView>
+        {/* <Button onPress={() => console.log(products)}>click</Button> */}
       </>
     )
   }
@@ -47,7 +63,7 @@ const HomeStackNavigator = ({ addToCart, products, getProdsByCategories }) => {
         options={{
           headerShown: false,
         }}
-        name={ROUTE_KEYS.HOME_SCREEN}
+        name={ROUTE_KEYS.HOME.index}
         component={HomeScreen}
       />
     </HomeStack.Navigator>

@@ -68,22 +68,22 @@ export default function App() {
           >
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.HOME}
+              name={ROUTE_KEYS.HOME.stack}
               component={HomeStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.SEARCH}
+              name={ROUTE_KEYS.SEARCH.stack}
               component={SearchScreen}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.CART}
+              name={ROUTE_KEYS.CART.stack}
               component={CartStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.PROFILE}
+              name={ROUTE_KEYS.PROFILE.stack}
               component={ProfileScreen}
             />
           </Tab.Navigator>

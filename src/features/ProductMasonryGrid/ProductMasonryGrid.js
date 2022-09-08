@@ -1,21 +1,28 @@
 import React, { useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import MasonryList from '@react-native-seoul/masonry-list'
 import PropTypes from 'prop-types'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { Button } from 'react-native-paper'
+import MasonryList from '@react-native-seoul/masonry-list'
+import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 
 import { colors } from '../../utils/colors'
 import { fonts } from '../../utils/fonts'
 import { fontSizes } from '../../utils/sizes'
 import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
-import { Button } from 'react-native-paper'
 
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
 
-const ProductMasonryGrid = ({ products, title, addToCart }) => {
+const ProductMasonryGrid = ({ productData, addToCart }) => {
+  const { products, title, stackRoute, category } = productData
+
   return (
     <View style={styles.masonryContainer}>
-      <Text style={styles.masonryTitle}>{title}</Text>
+      <ProductSectionTitle
+        stackRoute={stackRoute}
+        category={category}
+        title={title}
+      />
       <MasonryList
         numColumns={2}
         // style={styles.masonryContainer}
@@ -57,18 +64,27 @@ const GridItem = ({ item, addToCart }) => {
     }
   }
 
+  const getDynamicFontSize = (name) => {
+    console.log(name.length)
+    if (name.length > 16) return { fontSize: 15 }
+    else return {}
+  }
+
   return (
     <>
       <View style={[styles.masonryGridItem]}>
         {images && images[0] && images[0].thumbnail && (
           <Image
-            style={[styles.productImage, { height: heights[random] }]}
+            style={[styles.productImage, { height: heights[0] }]}
             source={{ uri: images[0].thumbnail }}
           />
         )}
-        <Text numberOfLines={3} style={styles.productTitle}>
-          {name}
-        </Text>
+        <View style={styles.productTitleWrapper}>
+          <Text numberOfLines={3} style={styles.productTitle}>
+            {name}
+          </Text>
+        </View>
+
         <Text style={styles.productPrices}>
           {getPrices(prices, price_range)}
         </Text>
@@ -98,11 +114,18 @@ const GridItem = ({ item, addToCart }) => {
           style={[
             styles.productStoreName,
             { color: colors.m_grey, marginRight: 5 },
+            getDynamicFontSize(store.shop_name),
           ]}
         >
           By
         </Text>
-        <Text style={[styles.productStoreName, { textDecorationLine: true }]}>
+        <Text
+          style={[
+            styles.productStoreName,
+            { textDecorationLine: true },
+            getDynamicFontSize(store.shop_name),
+          ]}
+        >
           {store.shop_name}
         </Text>
       </View>
@@ -133,8 +156,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
+  productTitleWrapper: {
+    minHeight: 90,
+    justifyContent: 'center',
+  },
   productTitle: {
-    fontSize: 20,
+    fontSize: 22,
+
     fontFamily: fonts.light,
     letterSpacing: -0.4,
     textAlign: 'center',
@@ -178,5 +206,10 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({})
+
+ProductMasonryGrid.propTypes = {
+  productData: PropTypes.object.isRequired,
+  addToCart: PropTypes.func,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductMasonryGrid)
