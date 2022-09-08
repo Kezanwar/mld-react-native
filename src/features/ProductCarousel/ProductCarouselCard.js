@@ -23,16 +23,6 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
     else return {}
   }
 
-  // const getPrices = () => {
-  //   if (price_range) {
-  //     return (
-  //       correctPriceWithCurrency(price_range.min_amount) +
-  //       ' - ' +
-  //       correctPriceWithCurrency(price_range.max_amount)
-  //     )
-  //   } else return correctPriceWithCurrency(prices.price)
-  // }
-
   const handleAddToCart = () => {
     addToCart({
       title: name,
@@ -99,9 +89,9 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
 const styles = StyleSheet.create({
   carouselCardWrapper: {
     backgroundColor: colors.white,
-    marginRight: spacing.lg,
+    marginRight: spacing.m,
     padding: spacing.ml,
-    borderRadius: spacing.sm,
+    borderRadius: spacing.m,
     // shadowColor: '#171717',
     // shadowOffset: { width: 0, height: 0 },
     // shadowOpacity: 0.1,
