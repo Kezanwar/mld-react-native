@@ -10,6 +10,7 @@ import { ROUTE_KEYS } from '../../../constants/constants'
 import { colors } from '../../utils/colors'
 import ProductCarousel from '../../features/ProductCarousel/ProductCarousel'
 import ProductMasonryGrid from '../../features/ProductMasonryGrid/ProductMasonryGrid'
+import { useIsFocused } from '@react-navigation/native'
 
 const HomeStackNavigator = ({
   addToCart,
@@ -30,7 +31,9 @@ const HomeStackNavigator = ({
   console.log(products)
   console.log(vendors)
 
-  function HomeScreen() {
+  function HomeScreen(props) {
+    const isFocused = useIsFocused()
+    console.log(`isFocused = ${isFocused}`)
     return (
       <>
         <ScrollView contentContainerStyle={styles.screenWrapper}>
