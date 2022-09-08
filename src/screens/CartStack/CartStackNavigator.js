@@ -20,8 +20,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
           justifyContent: 'center',
         }}
       >
-        {cart &&
-          cart.length > 0 &&
+        {cart?.length > 0 &&
           cart.map((item) => {
             return useMemo(() => (
               <View
@@ -44,7 +43,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
     <CartStack.Navigator>
       <CartStack.Screen
         options={{ headerShown: false }}
-        name={ROUTE_KEYS.CART_SCREEN}
+        name={ROUTE_KEYS.CART.index}
         component={CartScreen}
       />
     </CartStack.Navigator>

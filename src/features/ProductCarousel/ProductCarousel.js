@@ -1,20 +1,31 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts } from '../../utils/fonts'
 import ProductCarouselCard from './ProductCarouselCard'
+import ProductCategorySectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 
-const ProductCarousel = ({ title, products, dimensions }) => {
-  console.log(products)
+const ProductCarousel = ({ title, products, stackRoute, slug }) => {
+  const dimensions = Dimensions.get('window')
   return (
     <View style={styles.carouselWrapper}>
-      <Text style={styles.carouselTitle}>{title}</Text>
+      <ProductCategorySectionTitle
+        slug={slug}
+        stackRoute={stackRoute}
+        title={title}
+      />
       <ScrollView style={styles.scrollView} alwaysBounceHorizontal horizontal>
         {products &&
           products.map((prod) => {
-            return <ProductCarouselCard dimensions={dimensions} prod={prod} />
+            return (
+              <ProductCarouselCard
+                key={`product-${prod.id}`}
+                dimensions={dimensions}
+                prod={prod}
+              />
+            )
           })}
       </ScrollView>
     </View>
@@ -33,7 +44,6 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.xxl,
     letterSpacing: -0.5,
     marginBottom: spacing.sm,
-    // textDecorationLine: true,
     paddingLeft: spacing.sm,
     fontFamily: fonts.light,
     textTransform: 'lowercase',
