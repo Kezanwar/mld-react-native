@@ -20,14 +20,11 @@ const ProductMasonryGrid = ({
   slug,
   addToCart,
 }) => {
-  // const {} = data
-
   return (
     <View style={styles.masonryContainer}>
       <ProductSectionTitle stackRoute={stackRoute} slug={slug} title={title} />
       <MasonryList
         numColumns={2}
-        // style={styles.masonryContainer}
         data={products.slice(6, 12)}
         keyExtractor={(item) => item.id}
         renderItem={({ item, i }) => (

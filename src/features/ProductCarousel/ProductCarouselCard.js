@@ -40,11 +40,11 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
 
   return (
     <View
-      style={[styles.carouselCardWrapper, { width: dimensions.width * 0.6 }]}
+      style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}
     >
       {images && images[0] && images[0].thumbnail && (
         <Image
-          style={[styles.productImage, { height: dimensions.height * 0.2 }]}
+          style={[styles.productImage, { height: dimensions.height * 0.3 }]}
           source={{ uri: images[0].thumbnail }}
         />
       )}
@@ -91,22 +91,17 @@ const styles = StyleSheet.create({
     marginRight: spacing.m,
     padding: spacing.ml,
     borderRadius: spacing.m,
-    // shadowColor: '#171717',
-    // shadowOffset: { width: 0, height: 0 },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 3,
     borderWidth: 1,
     borderColor: colors.l_grey,
     justifyContent: 'space-between',
   },
   productImage: {
-    flex: 2,
     marginBottom: spacing.lg,
     borderRadius: 5,
   },
   productTitle: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 26,
     color: colors.d_grey,
     marginBottom: spacing.lg,
     fontFamily: fonts.light,
@@ -123,9 +118,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.35,
   },
   add_to_cart: {
-    // borderColor: colors.d_grey,
-    // borderWidth: 1,
-    // backgroundColor: colors.d_grey,
     color: colors.white,
     marginBottom: spacing.lg,
     borderRadius: 100,
@@ -153,6 +145,7 @@ const styles = StyleSheet.create({
 ProductCarouselCard.propTypes = {
   prod: PropTypes.object,
   dimensions: PropTypes.object,
+  addToCart: PropTypes.func,
 }
 
 const mapDispatchToProps = {
