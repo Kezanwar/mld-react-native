@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const VendorCarousel = ({ data }) => {
+const VendorCarousel = () => {
   return (
     <View>
       <Text>VendorCarousel</Text>
