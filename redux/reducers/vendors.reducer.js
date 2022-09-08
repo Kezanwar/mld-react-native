@@ -1,13 +1,13 @@
 import { VENDORS } from '../actions/types.actions'
 
-const initialState = []
+const initialState = {}
 
 const vendors = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {
     case VENDORS.GET_VENDORS: {
-      return [...state, ...payload]
+      return { ...state, all: payload }
     }
     default:
       return state

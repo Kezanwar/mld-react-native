@@ -12,8 +12,6 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
   const TabItem = useCallback(({ item, index }) => {
     const isFocused = state.index === index
 
-    console.log(item.key)
-
     const onPress = () => {
       const event = navigation.emit({
         type: 'tabPress',

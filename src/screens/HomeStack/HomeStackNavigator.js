@@ -30,33 +30,29 @@ const HomeStackNavigator = ({
   console.log(products)
   console.log(vendors)
 
-  const dimensions = Dimensions.get('window')
-
   function HomeScreen() {
     return (
       <>
         <ScrollView contentContainerStyle={styles.screenWrapper}>
-          {products && products.coffee && (
+          {products?.coffee && (
             <ProductCarousel
-              dimensions={dimensions}
-              products={products.coffee.products.slice(12, 18)}
-              title={products.coffee.title}
+              {...products.coffee}
+              slug={'coffee'}
+              stackRoute={ROUTE_KEYS.HOME.category}
             />
           )}
-          {products && products.spirits && (
+          {products?.spirits && (
             <ProductMasonryGrid
-              productData={{
-                ...products.spirits,
-                stackRoute: ROUTE_KEYS.HOME.category,
-                category: 'spirits',
-              }}
+              {...products.spirits}
+              stackRoute={ROUTE_KEYS.HOME.category}
+              slug={'spirits'}
             />
           )}
-          {products && products.award_winners && (
+          {products?.award_winners && (
             <ProductCarousel
-              dimensions={dimensions}
-              products={products.award_winners.products.reverse().slice(0, 6)}
-              title={products.award_winners.title}
+              {...products.award_winners}
+              slug={'award-winners'}
+              stackRoute={ROUTE_KEYS.HOME.category}
             />
           )}
         </ScrollView>

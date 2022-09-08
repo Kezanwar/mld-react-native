@@ -8,16 +8,20 @@ import { fontSizes } from '../../utils/sizes'
 
 import { AntDesign } from '@expo/vector-icons'
 
-const ProductCategorySectionTitle = ({ title, icon, stackRoute, category }) => {
+const ProductCategorySectionTitle = ({ title, icon, stackRoute, slug }) => {
   const navigation = useNavigation()
   const arrowIcon = ''
-  if (stackRoute && category) {
+  if (stackRoute && slug) {
     return (
       <TouchableOpacity
+        // onPress={() =>
+        //   navigation.navigate(stackRoute, {
+        //     category: slug,
+        //   })
         onPress={() =>
-          navigation.navigate(stackRoute, {
-            category: category,
-          })
+          alert(
+            `navigate to ${stackRoute} with the category slug (${slug}) for additional data fetching`
+          )
         }
       >
         <View style={styles.productSectionTitleContainer}>
@@ -62,7 +66,7 @@ ProductCategorySectionTitle.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string,
   stackRoute: PropTypes.string,
-  category: PropTypes.string,
+  slug: PropTypes.string,
 }
 
 export default ProductCategorySectionTitle

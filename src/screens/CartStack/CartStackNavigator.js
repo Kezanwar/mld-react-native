@@ -20,8 +20,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
           justifyContent: 'center',
         }}
       >
-        {cart &&
-          cart.length > 0 &&
+        {cart?.length > 0 &&
           cart.map((item) => {
             return useMemo(() => (
               <View

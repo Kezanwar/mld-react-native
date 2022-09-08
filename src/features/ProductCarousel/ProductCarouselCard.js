@@ -40,7 +40,6 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
 
   return (
     <View
-      key={`product-${id}`}
       style={[styles.carouselCardWrapper, { width: dimensions.width * 0.6 }]}
     >
       {images && images[0] && images[0].thumbnail && (

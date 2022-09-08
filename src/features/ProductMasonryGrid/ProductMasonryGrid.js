@@ -13,20 +13,22 @@ import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
 
-const ProductMasonryGrid = ({ productData, addToCart }) => {
-  const { products, title, stackRoute, category } = productData
+const ProductMasonryGrid = ({
+  products,
+  title,
+  stackRoute,
+  slug,
+  addToCart,
+}) => {
+  // const {} = data
 
   return (
     <View style={styles.masonryContainer}>
-      <ProductSectionTitle
-        stackRoute={stackRoute}
-        category={category}
-        title={title}
-      />
+      <ProductSectionTitle stackRoute={stackRoute} slug={slug} title={title} />
       <MasonryList
         numColumns={2}
         // style={styles.masonryContainer}
-        data={products}
+        data={products.slice(6, 12)}
         keyExtractor={(item) => item.id}
         renderItem={({ item, i }) => (
           <GridItem addToCart={addToCart} item={item} />
@@ -121,7 +123,7 @@ const GridItem = ({ item, addToCart }) => {
         <Text
           style={[
             styles.productStoreName,
-            { textDecorationLine: true },
+            { textDecorationLine: 'underline' },
             getDynamicFontSize(store.shop_name),
           ]}
         >
@@ -207,7 +209,10 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({})
 
 ProductMasonryGrid.propTypes = {
-  productData: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  products: PropTypes.array.isRequired,
+  stackRoute: PropTypes.string,
+  slug: PropTypes.string,
   addToCart: PropTypes.func,
 }
 
