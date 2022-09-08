@@ -12,6 +12,8 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
   const TabItem = useCallback(({ item, index }) => {
     const isFocused = state.index === index
 
+    console.log(item.key)
+
     const onPress = () => {
       const event = navigation.emit({
         type: 'tabPress',
@@ -35,16 +37,16 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
 
     let icon = ''
     switch (item.name) {
-      case ROUTE_KEYS.HOME:
+      case ROUTE_KEYS.HOME.stack:
         icon = 'home'
         break
-      case ROUTE_KEYS.SEARCH:
+      case ROUTE_KEYS.SEARCH.stack:
         icon = 'magnify'
         break
-      case ROUTE_KEYS.CART:
+      case ROUTE_KEYS.CART.stack:
         icon = 'basket'
         break
-      case ROUTE_KEYS.PROFILE:
+      case ROUTE_KEYS.PROFILE.stack:
         icon = 'account'
         break
       default:
@@ -64,7 +66,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
           icon={icon}
           size={fontSizes.xl}
         />
-        {item.name === ROUTE_KEYS.CART && (
+        {item.name === ROUTE_KEYS.CART.stack && (
           <View style={styles.cartBadgeContainer}>
             <Text style={styles.cartBadge}>{cart.length}</Text>
           </View>

@@ -65,7 +65,6 @@ const GridItem = ({ item, addToCart }) => {
   }
 
   const getDynamicFontSize = (name) => {
-    console.log(name.length)
     if (name.length > 16) return { fontSize: 15 }
     else return {}
   }

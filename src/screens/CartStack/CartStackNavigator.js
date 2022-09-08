@@ -44,7 +44,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
     <CartStack.Navigator>
       <CartStack.Screen
         options={{ headerShown: false }}
-        name={ROUTE_KEYS.CART_SCREEN}
+        name={ROUTE_KEYS.CART.index}
         component={CartScreen}
       />
     </CartStack.Navigator>
