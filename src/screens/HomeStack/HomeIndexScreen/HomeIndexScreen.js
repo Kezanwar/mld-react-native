@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-
 import PropTypes from 'prop-types'
 
 import ProductCarousel from '../../../features/ProductCarousel/ProductCarousel'
@@ -16,7 +15,6 @@ import { getAllVendors } from '../../../../redux/actions/vendors.actions'
 import { connect } from 'react-redux'
 
 const HomeIndexScreen = ({
-  addToCart,
   products,
   getProdsByCategories,
   vendors,
@@ -57,7 +55,6 @@ const HomeIndexScreen = ({
           />
         )}
       </ScrollView>
-      {/* <Button onPress={() => console.log(products)}>click</Button> */}
     </>
   )
 }
@@ -78,5 +75,12 @@ const mapStateToProps = (state) => ({
   products: state.products,
   vendors: state.vendors,
 })
+
+HomeIndexScreen.propTypes = {
+  products: PropTypes.object,
+  vendors: PropTypes.object,
+  getProdsByCategories: PropTypes.func,
+  getAllVendors: PropTypes.func,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeIndexScreen)

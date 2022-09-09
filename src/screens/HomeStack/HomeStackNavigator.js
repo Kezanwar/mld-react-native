@@ -1,12 +1,9 @@
 import React from 'react'
-
-import PropTypes from 'prop-types'
-
+import HomeIndexScreen from './HomeIndexScreen/HomeIndexScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ROUTE_KEYS } from '../../../constants/constants'
-import HomeIndexScreen from './HomeIndexScreen/HomeIndexScreen'
 
-const HomeStackNavigator = ({}) => {
+const HomeStackNavigator = () => {
   const HomeStack = createNativeStackNavigator()
   return (
     <HomeStack.Navigator>
