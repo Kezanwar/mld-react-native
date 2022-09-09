@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts } from '../../utils/fonts'
@@ -18,12 +18,12 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
     color: colors.d_grey,
   })
 
-  const getDynamicFontSize = () => {
+  const getDynamicFontSize = useCallback(() => {
     if (name.length > 20) return { fontSize: 24 }
     else return {}
-  }
+  }, [])
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     addToCart({
       title: name,
       product_id: id,
@@ -36,7 +36,7 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
         color: 'green',
       })
     }
-  }
+  }, [])
 
   return (
     <View

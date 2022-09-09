@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-paper'
@@ -48,7 +48,7 @@ const GridItem = ({ item, addToCart }) => {
     color: colors.d_grey,
   })
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     addToCart({
       title: name,
       product_id: id,
@@ -61,12 +61,12 @@ const GridItem = ({ item, addToCart }) => {
         color: 'green',
       })
     }
-  }
+  }, [])
 
-  const getDynamicFontSize = (name) => {
+  const getDynamicFontSize = useCallback((name) => {
     if (name.length > 16) return { fontSize: 15 }
     else return {}
-  }
+  }, [])
 
   return (
     <>
