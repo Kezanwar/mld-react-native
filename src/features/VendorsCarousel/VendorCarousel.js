@@ -7,13 +7,19 @@ import { fonts } from '../../utils/fonts'
 import VendorCarouselCard from './VendorCarouselCard'
 
 const VendorCarousel = ({ title, vendors }) => {
-  console.log(vendors)
-  const dimensions = Dimensions.get('window')
-  return useMemo(
-    () => (
+  return useMemo(() => {
+    const dimensions = Dimensions.get('window')
+    return (
       <View style={styles.carouselWrapper}>
         <Text style={styles.carouselTitle}>{title}</Text>
-        <ScrollView style={styles.scrollView} alwaysBounceHorizontal horizontal>
+        <ScrollView
+          snapToAlignment={'left'}
+          snapToInterval={dimensions.width * 0.85 + spacing.m}
+          decelerationRate={0}
+          style={styles.scrollView}
+          alwaysBounceHorizontal
+          horizontal
+        >
           {vendors
             ? vendors.map((vendor, i) => {
                 return (
@@ -27,9 +33,8 @@ const VendorCarousel = ({ title, vendors }) => {
             : null}
         </ScrollView>
       </View>
-    ),
-    []
-  )
+    )
+  }, [title, vendors])
 }
 
 const styles = StyleSheet.create({

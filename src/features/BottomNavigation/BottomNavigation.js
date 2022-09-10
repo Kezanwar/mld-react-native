@@ -83,7 +83,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
         />
       </View>
     ),
-    [cart, state]
+    [cart.length, state.history]
   )
 }
 

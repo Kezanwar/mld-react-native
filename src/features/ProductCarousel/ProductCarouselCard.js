@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   productImage: {
     marginBottom: spacing.lg,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   productTitle: {
     textAlign: 'center',
