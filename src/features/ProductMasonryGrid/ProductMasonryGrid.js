@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-paper'
@@ -20,18 +20,25 @@ const ProductMasonryGrid = ({
   slug,
   addToCart,
 }) => {
-  return (
-    <View style={styles.masonryContainer}>
-      <ProductSectionTitle stackRoute={stackRoute} slug={slug} title={title} />
-      <MasonryList
-        numColumns={2}
-        data={products.slice(6, 12)}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item, i }) => (
-          <GridItem addToCart={addToCart} item={item} />
-        )}
-      />
-    </View>
+  return useMemo(
+    () => (
+      <View style={styles.masonryContainer}>
+        <ProductSectionTitle
+          stackRoute={stackRoute}
+          slug={slug}
+          title={title}
+        />
+        <MasonryList
+          numColumns={2}
+          data={products.slice(6, 12)}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item, i }) => (
+            <GridItem addToCart={addToCart} item={item} />
+          )}
+        />
+      </View>
+    ),
+    [products, title, stackRoute, slug]
   )
 }
 

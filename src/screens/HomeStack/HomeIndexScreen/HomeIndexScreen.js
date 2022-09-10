@@ -13,12 +13,16 @@ import { addToCart } from '../../../../redux/actions/cart.actions'
 import { getProdsByCategories } from '../../../../redux/actions/products.actions'
 import { getAllVendors } from '../../../../redux/actions/vendors.actions'
 import { connect } from 'react-redux'
+import VendorCarousel from '../../../features/VendorsCarousel/VendorCarousel'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Button } from 'react-native-paper'
 
 const HomeIndexScreen = ({
   products,
   getProdsByCategories,
   vendors,
   getAllVendors,
+  navigation,
 }) => {
   const isFocused = useIsFocused()
   console.log(isFocused)
@@ -54,6 +58,14 @@ const HomeIndexScreen = ({
             stackRoute={ROUTE_KEYS.HOME.category}
           />
         )}
+        {vendors?.all && (
+          <VendorCarousel title={'Recommended Stores'} vendors={vendors.all} />
+        )}
+        <Button
+          onPress={() => navigation.navigate(ROUTE_KEYS.HOME.single_product)}
+        >
+          click
+        </Button>
       </ScrollView>
     </>
   )
