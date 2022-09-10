@@ -56,10 +56,18 @@ export default function App() {
     )
   }
 
+  const MyStatusBar = ({ backgroundColor, ...props }) => (
+    <View style={[styles.statusBar, { backgroundColor }]}>
+      <SafeAreaView>
+        <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      </SafeAreaView>
+    </View>
+  )
+
   return (
     <Provider store={store}>
       <PaperProvider>
-        <StatusBar style="auto" />
+        <MyStatusBar backgroundColor={colors.white} />
         <NavigationContainer ref={navigationRef}>
           <Tab.Navigator
             tabBar={(props) => {

@@ -79,7 +79,16 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
 
       <View style={styles.storeDetailsContainer}>
         <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
-        <Text style={styles.storeName}>By {store.shop_name}</Text>
+        <View style={styles.storeNameContainer}>
+          <Text
+            style={[styles.storeName, { color: colors.m_grey, marginRight: 5 }]}
+          >
+            By
+          </Text>
+          <Text style={[styles.storeName, { textDecorationLine: 'underline' }]}>
+            {store.shop_name}
+          </Text>
+        </View>
       </View>
     </View>
   )
@@ -126,6 +135,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  storeNameContainer: {
+    flexDirection: 'row',
   },
   storeName: {
     fontSize: 18,

@@ -39,15 +39,6 @@ const styles = StyleSheet.create({
     paddingTop: spacing.xxl,
     // marginBottom: spacing.sm,
   },
-  carouselTitle: {
-    color: colors.mld_red,
-    fontSize: fontSizes.xxl,
-    letterSpacing: -0.5,
-    marginBottom: spacing.sm,
-    paddingLeft: spacing.sm,
-    fontFamily: fonts.light,
-    textTransform: 'lowercase',
-  },
   scrollView: {
     // padding: spacing.lg,
     paddingBottom: spacing.lg,
