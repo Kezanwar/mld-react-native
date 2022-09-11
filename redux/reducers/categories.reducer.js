@@ -7,7 +7,7 @@ const categories = (state = initialState, action) => {
 
   switch (type) {
     case CATEGORIES.GET_CATEGORIES: {
-      return [...state, payload]
+      return payload
     }
     default:
       return state

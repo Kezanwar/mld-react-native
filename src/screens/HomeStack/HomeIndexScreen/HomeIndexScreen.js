@@ -16,10 +16,14 @@ import { connect } from 'react-redux'
 import VendorCarousel from '../../../features/VendorsCarousel/VendorCarousel'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button } from 'react-native-paper'
+import { getCategories } from '../../../../redux/actions/categories.actions'
+import CategoryCarousel from '../../../features/CategoryCarousel/CategoryCarousel'
 
 const HomeIndexScreen = ({
   products,
   getProdsByCategories,
+  getCategories,
+  categories,
   vendors,
   getAllVendors,
   navigation,
@@ -28,9 +32,10 @@ const HomeIndexScreen = ({
   console.log(isFocused)
 
   useEffect(() => {
-    getProdsByCategories('coffee')
-    getProdsByCategories('spirits')
-    getProdsByCategories('award_winners')
+    // getProdsByCategories('coffee')
+    // getProdsByCategories('spirits')
+    // getProdsByCategories('award_winners')
+    getCategories()
     getAllVendors()
   }, [])
 
@@ -44,6 +49,7 @@ const HomeIndexScreen = ({
             stackRoute={ROUTE_KEYS.HOME.category}
           />
         )}
+
         {products?.spirits && (
           <ProductMasonryGrid
             {...products.spirits}
@@ -51,6 +57,14 @@ const HomeIndexScreen = ({
             slug={'spirits'}
           />
         )}
+
+        {categories ? (
+          <CategoryCarousel
+            title={'Browse Categories'}
+            categories={categories}
+          />
+        ) : null}
+
         {products?.award_winners && (
           <ProductCarousel
             {...products.award_winners}
@@ -58,14 +72,17 @@ const HomeIndexScreen = ({
             stackRoute={ROUTE_KEYS.HOME.category}
           />
         )}
+
         {vendors?.all && (
           <VendorCarousel title={'Recommended Stores'} vendors={vendors.all} />
         )}
+
         <Button
           onPress={() => navigation.navigate(ROUTE_KEYS.HOME.single_product)}
         >
-          click
+          single product
         </Button>
+        {/* <Button onPress={() => console.log(categories)}>state</Button> */}
       </ScrollView>
     </>
   )
@@ -81,11 +98,13 @@ const mapDispatchToProps = {
   addToCart,
   getProdsByCategories,
   getAllVendors,
+  getCategories,
 }
 
 const mapStateToProps = (state) => ({
   products: state.products,
   vendors: state.vendors,
+  categories: state.categories,
 })
 
 HomeIndexScreen.propTypes = {
@@ -93,6 +112,7 @@ HomeIndexScreen.propTypes = {
   vendors: PropTypes.object,
   getProdsByCategories: PropTypes.func,
   getAllVendors: PropTypes.func,
+  getCategories: PropTypes.func,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeIndexScreen)
