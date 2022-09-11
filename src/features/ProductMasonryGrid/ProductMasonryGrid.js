@@ -33,7 +33,7 @@ const ProductMasonryGrid = ({
           data={products.slice(6, 12)}
           keyExtractor={(item) => item.id}
           renderItem={({ item, i }) => (
-            <GridItem addToCart={addToCart} item={item} />
+            <GridItem index={i} addToCart={addToCart} item={item} />
           )}
         />
       </View>
@@ -42,7 +42,7 @@ const ProductMasonryGrid = ({
   )
 }
 
-const GridItem = ({ item, addToCart }) => {
+const GridItem = ({ index, item, addToCart }) => {
   const { id, name, short_description, prices, store, images } = item
   const { price_range } = prices
 
@@ -75,9 +75,14 @@ const GridItem = ({ item, addToCart }) => {
     else return {}
   }, [])
 
+  const removeFirstTwoMarginTop = useCallback((i) => {
+    if (i === 0 || i === 1) return { marginTop: 12 }
+    else return {}
+  }, [])
+
   return (
     <>
-      <View style={[styles.masonryGridItem]}>
+      <View style={[styles.masonryGridItem, removeFirstTwoMarginTop(index)]}>
         {images && images[0] && images[0].thumbnail && (
           <Image
             style={[styles.productImage, { height: heights[0] }]}
@@ -140,13 +145,6 @@ const GridItem = ({ item, addToCart }) => {
 
 const styles = StyleSheet.create({
   masonryContainer: { padding: 10 },
-  masonryTitle: {
-    marginLeft: 10,
-    fontFamily: fonts.light,
-    color: colors.mld_red,
-    fontSize: fontSizes.xxl,
-    textTransform: 'lowercase',
-  },
   masonryGridItem: {
     flex: 1,
     marginTop: 20,

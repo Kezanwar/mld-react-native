@@ -32,9 +32,9 @@ const HomeIndexScreen = ({
   console.log(isFocused)
 
   useEffect(() => {
-    // getProdsByCategories('coffee')
-    // getProdsByCategories('spirits')
-    // getProdsByCategories('award_winners')
+    getProdsByCategories('coffee')
+    getProdsByCategories('spirits')
+    getProdsByCategories('award_winners')
     getCategories()
     getAllVendors()
   }, [])

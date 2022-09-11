@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   carouselWrapper: {
     // flex: 0.7,
     padding: 10,
-    paddingTop: spacing.xxl,
+    paddingTop: spacing.lg,
     // marginBottom: spacing.sm,
   },
   scrollView: {
