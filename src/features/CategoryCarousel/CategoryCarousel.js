@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, View, ScrollView, Dimensions } from 'react-native'
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import VendorCarouselCard from './VendorCarouselCard'
 import StandardSectionTitle from '../../components/StandardSectionTitle/StandardSectionTitle'
+import CategoryCarouselCard from './CategoryCarouselCard'
 import { spacing } from '../../utils/sizes'
 
-const VendorCarousel = ({ title, vendors }) => {
+const CategoryCarousel = ({ title, categories }) => {
   return useMemo(() => {
     const dimensions = Dimensions.get('window')
     return (
@@ -19,41 +19,43 @@ const VendorCarousel = ({ title, vendors }) => {
           alwaysBounceHorizontal
           horizontal
         >
-          {vendors
-            ? vendors.map((vendor, i) => {
-                return (
-                  <VendorCarouselCard
-                    key={`vendor-${vendor.id}-${i}`}
-                    dimensions={dimensions}
-                    vendor={vendor}
-                  />
-                )
+          {categories
+            ? categories.map((category, i) => {
+                if (
+                  category.slug === 'dried-fruit' ||
+                  category.slug === 'confectionary'
+                ) {
+                  return (
+                    <CategoryCarouselCard
+                      key={`category-card-${category.slug}`}
+                      dimensions={dimensions}
+                      category={category}
+                    />
+                  )
+                } else return null
               })
             : null}
         </ScrollView>
       </View>
     )
-  }, [title, vendors])
+  }, [title, categories])
 }
 
 const styles = StyleSheet.create({
   carouselWrapper: {
-    // flex: 0.7,
     padding: 10,
     paddingTop: spacing.xxl,
-    // marginBottom: spacing.sm,
   },
   scrollView: {
-    // padding: spacing.lg,
     paddingBottom: spacing.lg,
     paddingTop: spacing.sm,
     paddingLeft: spacing.sm,
   },
 })
 
-VendorCarousel.propTypes = {
+CategoryCarousel.propTypes = {
   title: PropTypes.string,
-  vendors: PropTypes.arrayOf(PropTypes.object),
+  categories: PropTypes.arrayOf(PropTypes.object),
 }
 
-export default VendorCarousel
+export default CategoryCarousel
