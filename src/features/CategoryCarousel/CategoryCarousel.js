@@ -13,7 +13,7 @@ const CategoryCarousel = ({ title, categories }) => {
         <StandardSectionTitle text={title} />
         <ScrollView
           snapToAlignment={'left'}
-          snapToInterval={dimensions.width * 0.85 + spacing.m}
+          snapToInterval={dimensions.width * 0.8 + spacing.m}
           decelerationRate={0}
           style={styles.scrollView}
           alwaysBounceHorizontal
@@ -44,7 +44,7 @@ const CategoryCarousel = ({ title, categories }) => {
 const styles = StyleSheet.create({
   carouselWrapper: {
     padding: 10,
-    paddingTop: spacing.xxl,
+    paddingTop: spacing.lg,
   },
   scrollView: {
     paddingBottom: spacing.lg,

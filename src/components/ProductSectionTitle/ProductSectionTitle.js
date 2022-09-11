@@ -29,7 +29,7 @@ const ProductCategorySectionTitle = ({ title, icon, stackRoute, slug }) => {
           <AntDesign
             name="arrowright"
             style={styles.arrowIcon}
-            size={24}
+            size={38}
             color={colors.mld_red}
           />
         </View>
@@ -51,14 +51,15 @@ const styles = StyleSheet.create({
   },
   productSectionTitle: {
     marginHorizontal: 10,
+    marginRight: 12,
     letterSpacing: -0.4,
     fontFamily: fonts.light,
     color: colors.mld_red,
-    fontSize: fontSizes.xxl,
+    fontSize: 55,
     textTransform: 'lowercase',
   },
   arrowIcon: {
-    marginTop: -5,
+    marginTop: -10,
   },
 })
 
