@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { useNavigation } from '@react-navigation/native'
 import { fonts } from '../../utils/fonts'
 import { colors } from '../../utils/colors'
-import { fontSizes } from '../../utils/sizes'
+import { fontSizes, spacing } from '../../utils/sizes'
 
 import { AntDesign } from '@expo/vector-icons'
 
@@ -48,11 +48,13 @@ const styles = StyleSheet.create({
   productSectionTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: spacing.m,
   },
   productSectionTitle: {
     marginHorizontal: 10,
     marginRight: 12,
-    letterSpacing: -0.4,
+
+    letterSpacing: -0.6,
     fontFamily: fonts.light,
     color: colors.mld_red,
     fontSize: 55,

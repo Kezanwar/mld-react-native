@@ -13,9 +13,9 @@ const styles = StyleSheet.create({
   StandardSectionTitle: {
     color: colors.mld_red,
     fontSize: 55,
-    letterSpacing: -0.5,
-    marginBottom: spacing.sm,
-    paddingLeft: 12,
+    letterSpacing: -0.6,
+    marginBottom: spacing.m,
+    paddingLeft: 10,
     fontFamily: fonts.light,
     textTransform: 'lowercase',
   },
