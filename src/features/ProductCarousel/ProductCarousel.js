@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   scrollView: {
     // padding: spacing.lg,
     paddingBottom: spacing.lg,
-    paddingTop: spacing.sm,
+    // paddingTop: spacing.sm,
     paddingLeft: spacing.sm,
   },
 })
