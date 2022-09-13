@@ -23,7 +23,10 @@ const CategoryCarousel = ({ title, categories }) => {
             ? categories.map((category, i) => {
                 if (
                   category.slug === 'dried-fruit' ||
-                  category.slug === 'confectionary'
+                  category.slug === 'confectionary' ||
+                  category.slug === 'rice-pasta-noodles' ||
+                  category.slug === 'bakery' ||
+                  category.slug === 'spirits'
                 ) {
                   return (
                     <CategoryCarouselCard
