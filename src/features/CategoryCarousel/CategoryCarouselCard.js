@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
     marginRight: spacing.m,
     padding: spacing.ml,
     borderRadius: spacing.m,
-    // borderWidth: 1,
-    // borderColor: colors.l_grey,
     justifyContent: 'space-between',
     overflow: 'hidden',
   },
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     color: colors.mld_red,
     fontFamily: fonts.light,
     letterSpacing: -0.4,
-    fontSize: 38,
+    fontSize: 40,
     marginBottom: spacing.m,
     textTransform: 'lowercase',
   },
@@ -61,16 +59,14 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     fontSize: fontSizes.lg,
     marginBottom: 36,
-    // width: 275,
     textTransform: 'lowercase',
   },
   categoryIcon: {
-    height: 60,
+    height: 80,
     width: 150,
     position: 'absolute',
-    right: -42,
+    right: -48,
     bottom: -24,
-    // aspectRatio: 1,
     resizeMode: 'contain',
   },
   viewAllWrapper: {
@@ -86,7 +82,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   arrowIcon: {
-    marginTop: -5,
+    marginTop: -6,
   },
 })
 
