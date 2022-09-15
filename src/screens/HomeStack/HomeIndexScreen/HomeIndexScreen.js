@@ -7,14 +7,13 @@ import ProductCarousel from '../../../features/ProductCarousel/ProductCarousel'
 import ProductMasonryGrid from '../../../features/ProductMasonryGrid/ProductMasonryGrid'
 
 import { colors } from '../../../utils/colors'
-import { ROUTE_KEYS } from '../../../../constants/constants'
+import { STACKS, STACK_ROUTES } from '../../../../constants/constants'
 
 import { addToCart } from '../../../../redux/actions/cart.actions'
 import { getProdsByCategories } from '../../../../redux/actions/products.actions'
 import { getAllVendors } from '../../../../redux/actions/vendors.actions'
 import { connect } from 'react-redux'
 import VendorCarousel from '../../../features/VendorsCarousel/VendorCarousel'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button } from 'react-native-paper'
 import { getCategories } from '../../../../redux/actions/categories.actions'
 import CategoryCarousel from '../../../features/CategoryCarousel/CategoryCarousel'
@@ -29,7 +28,6 @@ const HomeIndexScreen = ({
   navigation,
 }) => {
   const isFocused = useIsFocused()
-  console.log(isFocused)
 
   useEffect(() => {
     getProdsByCategories('coffee')
@@ -39,27 +37,33 @@ const HomeIndexScreen = ({
     getAllVendors()
   }, [])
 
+  const forwardProps = {
+    navigation,
+    stack: STACKS.HOME,
+  }
+
   return (
     <>
       <ScrollView contentContainerStyle={styles.screenWrapper}>
         {products?.coffee && (
           <ProductCarousel
+            {...forwardProps}
             {...products.coffee}
             slug={'coffee'}
-            stackRoute={ROUTE_KEYS.HOME.category}
           />
         )}
 
         {products?.spirits && (
           <ProductMasonryGrid
+            {...forwardProps}
             {...products.spirits}
-            stackRoute={ROUTE_KEYS.HOME.category}
             slug={'spirits'}
           />
         )}
 
         {categories ? (
           <CategoryCarousel
+            {...forwardProps}
             title={'Browse Categories'}
             categories={categories}
           />
@@ -67,18 +71,22 @@ const HomeIndexScreen = ({
 
         {products?.award_winners && (
           <ProductCarousel
+            {...forwardProps}
             {...products.award_winners}
             slug={'award-winners'}
-            stackRoute={ROUTE_KEYS.HOME.category}
           />
         )}
 
         {vendors?.all && (
-          <VendorCarousel title={'Recommended Stores'} vendors={vendors.all} />
+          <VendorCarousel
+            {...forwardProps}
+            title={'Recommended Stores'}
+            vendors={vendors.all}
+          />
         )}
 
         <Button
-          onPress={() => navigation.navigate(ROUTE_KEYS.HOME.single_product)}
+          onPress={() => navigation.navigate(STACK_ROUTES.HOME.single_product)}
         >
           single product
         </Button>

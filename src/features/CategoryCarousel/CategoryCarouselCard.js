@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import PropTypes from 'prop-types'
@@ -8,31 +14,41 @@ import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts } from '../../utils/fonts'
 
 import { connect } from 'react-redux'
+import { STACK_ROUTES } from '../../../constants/constants'
 
-const CategoryCarouselCard = ({ dimensions, category }) => {
-  const { name, description, icon } = category
+const CategoryCarouselCard = ({ navigation, dimensions, category, stack }) => {
+  const { name, description, icon, slug } = category
+
+  const handleNavigateAndSetState = () => {
+    navigation.navigate(STACK_ROUTES[stack].category, {
+      slug,
+    })
+  }
+
   return (
-    <View
-      style={[styles.carouselCardWrapper, { width: dimensions.width * 0.8 }]}
-    >
-      <Text style={styles.categoryTitle}>{name}</Text>
-      <Text style={styles.categoryDescription}>
-        The confectionery industry is a group of large companies around the
-        world that produce various types of chocolate, chewing gum, and candy
-      </Text>
-      <View style={styles.viewAllWrapper}>
-        <View style={[styles.viewAllWrapper]}>
-          <Text style={styles.viewAllText}>view all</Text>
-          <AntDesign
-            style={styles.arrowIcon}
-            name="arrowright"
-            size={26}
-            color={colors.mld_red}
-          />
+    <TouchableWithoutFeedback onPress={handleNavigateAndSetState}>
+      <View
+        style={[styles.carouselCardWrapper, { width: dimensions.width * 0.8 }]}
+      >
+        <Text style={styles.categoryTitle}>{name}</Text>
+        <Text style={styles.categoryDescription}>
+          The confectionery industry is a group of large companies around the
+          world that produce various types of chocolate, chewing gum, and candy
+        </Text>
+        <View style={styles.viewAllWrapper}>
+          <View style={[styles.viewAllWrapper]}>
+            <Text style={styles.viewAllText}>view all</Text>
+            <AntDesign
+              style={styles.arrowIcon}
+              name="arrowright"
+              size={26}
+              color={colors.mld_red}
+            />
+          </View>
+          <Image style={styles.categoryIcon} source={{ uri: icon }} />
         </View>
-        <Image style={styles.categoryIcon} source={{ uri: icon }} />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

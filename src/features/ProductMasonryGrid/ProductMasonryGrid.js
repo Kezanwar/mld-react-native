@@ -1,6 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native'
 import { Button } from 'react-native-paper'
 import MasonryList from '@react-native-seoul/masonry-list'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
@@ -12,20 +18,31 @@ import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
+import { STACK_ROUTES } from '../../../constants/constants'
 
 const ProductMasonryGrid = ({
+  stack,
   products,
   title,
-  stackRoute,
   slug,
   addToCart,
+  navigation,
 }) => {
-  return useMemo(
-    () => (
+  return useMemo(() => {
+    const forwardProps = { navigation, stack }
+    return (
       <View style={styles.masonryContainer}>
         <ProductSectionTitle
-          stackRoute={stackRoute}
           slug={slug}
+          navigateTo={
+            products
+              ? {
+                  route: STACK_ROUTES[stack].category,
+                  params: { slug: products.slug },
+                }
+              : null
+          }
+          navigation={navigation}
           title={title}
         />
         <MasonryList
@@ -33,16 +50,20 @@ const ProductMasonryGrid = ({
           data={products.slice(6, 12)}
           keyExtractor={(item) => item.id}
           renderItem={({ item, i }) => (
-            <GridItem index={i} addToCart={addToCart} item={item} />
+            <GridItem
+              {...forwardProps}
+              index={i}
+              addToCart={addToCart}
+              item={item}
+            />
           )}
         />
       </View>
-    ),
-    [products, title, stackRoute, slug]
-  )
+    )
+  }, [products, title, stack, slug])
 }
 
-const GridItem = ({ index, item, addToCart }) => {
+const GridItem = ({ index, item, addToCart, navigation, stack }) => {
   const { id, name, short_description, prices, store, images } = item
   const { price_range } = prices
 
@@ -82,43 +103,49 @@ const GridItem = ({ index, item, addToCart }) => {
 
   return (
     <>
-      <View style={[styles.masonryGridItem, removeFirstTwoMarginTop(index)]}>
-        {images && images[0] && images[0].thumbnail && (
-          <Image
-            style={[styles.productImage, { height: heights[0] }]}
-            source={{ uri: images[0].thumbnail }}
-          />
-        )}
-        <View style={styles.productTitleWrapper}>
-          <Text numberOfLines={3} style={styles.productTitle}>
-            {name}
-          </Text>
-        </View>
+      <TouchableWithoutFeedback
+        onPress={() =>
+          navigation.navigate(STACK_ROUTES[stack].single_product, { id })
+        }
+      >
+        <View style={[styles.masonryGridItem, removeFirstTwoMarginTop(index)]}>
+          {images && images[0] && images[0].thumbnail && (
+            <Image
+              style={[styles.productImage, { height: heights[0] }]}
+              source={{ uri: images[0].thumbnail }}
+            />
+          )}
+          <View style={styles.productTitleWrapper}>
+            <Text numberOfLines={3} style={styles.productTitle}>
+              {name}
+            </Text>
+          </View>
 
-        <Text style={styles.productPrices}>
-          {getPrices(prices, price_range)}
-        </Text>
-        <Button
-          onPress={handleAddToCart}
-          labelStyle={{
-            textTransform: 'lowercase',
-            fontFamily: fonts.light,
-            fontSize: fontSizes.m,
-            letterSpacing: -0.2,
-            textDecorationLine: 'underline',
-          }}
-          contentStyle={{
-            // flexDirection: 'row-reverse',
-            padding: 4,
-            color: 'red',
-          }}
-          icon={addToCartButtonData.icon}
-          color={addToCartButtonData.color}
-          style={styles.add_to_cart}
-        >
-          {addToCartButtonData.text}
-        </Button>
-      </View>
+          <Text style={styles.productPrices}>
+            {getPrices(prices, price_range)}
+          </Text>
+          <Button
+            onPress={handleAddToCart}
+            labelStyle={{
+              textTransform: 'lowercase',
+              fontFamily: fonts.light,
+              fontSize: fontSizes.m,
+              letterSpacing: -0.2,
+              textDecorationLine: 'underline',
+            }}
+            contentStyle={{
+              // flexDirection: 'row-reverse',
+              padding: 4,
+              color: 'red',
+            }}
+            icon={addToCartButtonData.icon}
+            color={addToCartButtonData.color}
+            style={styles.add_to_cart}
+          >
+            {addToCartButtonData.text}
+          </Button>
+        </View>
+      </TouchableWithoutFeedback>
       <View style={styles.productStoreDetailsContainer}>
         <Text
           style={[

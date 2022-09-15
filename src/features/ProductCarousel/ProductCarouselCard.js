@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
@@ -8,8 +14,16 @@ import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
+import { STACK_ROUTES } from '../../../constants/constants'
 
-const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
+const ProductCarouselCard = ({
+  dimensions,
+  prod,
+  addToCart,
+  cart,
+  stack,
+  navigation,
+}) => {
   const { id, name, short_description, prices, store, images } = prod
   const { price_range } = prices
   const [addToCartButtonData, setAddToCartButtonData] = useState({
@@ -39,58 +53,69 @@ const ProductCarouselCard = ({ dimensions, prod, addToCart, cart }) => {
   }, [])
 
   return (
-    <View
-      style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}
+    <TouchableWithoutFeedback
+      onPress={() =>
+        navigation.navigate(STACK_ROUTES[stack].single_product, { id: id })
+      }
     >
-      {images && images[0] && images[0].thumbnail && (
-        <Image
-          style={[styles.productImage, { height: dimensions.height * 0.3 }]}
-          source={{ uri: images[0].thumbnail }}
-        />
-      )}
-
-      <Text
-        numberOfLines={2}
-        style={[styles.productTitle, getDynamicFontSize()]}
+      <View
+        style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}
       >
-        {name}
-      </Text>
-      <Text style={styles.price_range}>{getPrices(prices, price_range)}</Text>
-      <Button
-        onPress={handleAddToCart}
-        labelStyle={{
-          textTransform: 'lowercase',
-          fontFamily: fonts.light,
-          fontSize: fontSizes.m,
-          letterSpacing: -0.2,
-          textDecorationLine: 'underline',
-        }}
-        contentStyle={{
-          // flexDirection: 'row-reverse',
-          padding: 4,
-          color: 'red',
-        }}
-        icon={addToCartButtonData.icon}
-        color={addToCartButtonData.color}
-        style={styles.add_to_cart}
-      >
-        {addToCartButtonData.text}
-      </Button>
+        {images && images[0] && images[0].thumbnail && (
+          <Image
+            style={[styles.productImage, { height: dimensions.height * 0.3 }]}
+            source={{ uri: images[0].thumbnail }}
+          />
+        )}
 
-      <View style={styles.storeDetailsContainer}>
-        <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
-        <View style={styles.storeNameContainer}>
-          <Text
-            style={[styles.storeName, { color: colors.m_grey, marginRight: 5 }]}
-          >
-            By
-          </Text>
-          <Text style={[styles.storeName, { textDecorationLine: 'underline' }]}>
-            {store.shop_name}
-          </Text>
+        <Text
+          numberOfLines={2}
+          style={[styles.productTitle, getDynamicFontSize()]}
+        >
+          {name}
+        </Text>
+        <Text style={styles.price_range}>{getPrices(prices, price_range)}</Text>
+        <Button
+          onPress={handleAddToCart}
+          labelStyle={{
+            textTransform: 'lowercase',
+            fontFamily: fonts.light,
+            fontSize: fontSizes.m,
+            letterSpacing: -0.2,
+            textDecorationLine: 'underline',
+          }}
+          contentStyle={{
+            // flexDirection: 'row-reverse',
+            padding: 4,
+            color: 'red',
+          }}
+          icon={addToCartButtonData.icon}
+          color={addToCartButtonData.color}
+          style={styles.add_to_cart}
+        >
+          {addToCartButtonData.text}
+        </Button>
+
+        <View style={styles.storeDetailsContainer}>
+          <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
+          <View style={styles.storeNameContainer}>
+            <Text
+              style={[
+                styles.storeName,
+                { color: colors.m_grey, marginRight: 5 },
+              ]}
+            >
+              By
+            </Text>
+            <Text
+              style={[styles.storeName, { textDecorationLine: 'underline' }]}
+            >
+              {store.shop_name}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

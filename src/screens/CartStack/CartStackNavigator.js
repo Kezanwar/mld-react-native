@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { removeFromCart } from '../../../redux/actions/cart.actions'
 import { connect } from 'react-redux'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { ROUTE_KEYS } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/constants'
 import { Button } from 'react-native-paper'
 import { spacing } from '../../utils/sizes'
 const CartStackNavigator = ({ removeFromCart, cart }) => {
@@ -43,7 +43,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
     <CartStack.Navigator>
       <CartStack.Screen
         options={{ headerShown: false }}
-        name={ROUTE_KEYS.CART.index}
+        name={STACK_ROUTES.CART.index}
         component={CartScreen}
       />
     </CartStack.Navigator>
