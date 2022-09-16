@@ -3,6 +3,7 @@ export const STACKS = {
   SEARCH: 'SEARCH',
   CART: 'CART',
   PROFILE: 'PROFILE',
+  SINGLE_PRODUCT: 'SINGLE_PRODUCT',
 }
 
 export const STACK_ROUTES = {
@@ -29,5 +30,9 @@ export const STACK_ROUTES = {
     index: 'PROFILE_INDEX',
     category: 'PROFILE_CATEGORY',
     single_product: 'PROFILE_SINGLE_PRODUCT',
+  },
+  [STACKS.SINGLE_PRODUCT]: {
+    stack: 'SINGLE_PRODUCT_STACK',
+    index: 'SINGLE_PRODUCT_INDEX',
   },
 }

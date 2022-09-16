@@ -20,6 +20,8 @@ const HomeStackNavigator = () => {
       <HomeStack.Screen
         options={{
           headerShown: false,
+          presentation: 'modal',
+          animationDuration: 100,
         }}
         name={STACK_ROUTES.HOME.single_product}
         component={HomeSingleProductScreen}
