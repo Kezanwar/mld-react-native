@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { fontSizes, spacing } from '../../utils/sizes'
 import ProductCarouselCard from './ProductCarouselCard'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const ProductCarousel = ({ navigation, title, products, stack, slug }) => {
   return useMemo(() => {

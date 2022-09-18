@@ -6,7 +6,7 @@ import { IconButton, Text } from 'react-native-paper'
 
 import { spacing, fontSizes } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
   const TabItem = useCallback(({ item, index }) => {

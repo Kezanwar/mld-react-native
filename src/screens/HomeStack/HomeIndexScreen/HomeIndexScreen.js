@@ -7,7 +7,7 @@ import ProductCarousel from '../../../features/ProductCarousel/ProductCarousel'
 import ProductMasonryGrid from '../../../features/ProductMasonryGrid/ProductMasonryGrid'
 
 import { colors } from '../../../utils/colors'
-import { STACKS, STACK_ROUTES } from '../../../../constants/constants'
+import { STACKS, STACK_ROUTES } from '../../../../constants/routes.constants'
 
 import { addToCart } from '../../../../redux/actions/cart.actions'
 import { getProdsByCategories } from '../../../../redux/actions/products.actions'
@@ -17,6 +17,9 @@ import VendorCarousel from '../../../features/VendorsCarousel/VendorCarousel'
 import { Button } from 'react-native-paper'
 import { getCategories } from '../../../../redux/actions/categories.actions'
 import CategoryCarousel from '../../../features/CategoryCarousel/CategoryCarousel'
+import GetComponent, {
+  COMPONENT_KEYS,
+} from '../../../../constants/components.constants'
 
 const HomeIndexScreen = ({
   products,
@@ -37,6 +40,8 @@ const HomeIndexScreen = ({
     getAllVendors()
   }, [])
 
+  console.log(vendors)
+
   const forwardProps = {
     navigation,
     stack: STACKS.HOME,
@@ -45,21 +50,20 @@ const HomeIndexScreen = ({
   return (
     <>
       <ScrollView contentContainerStyle={styles.screenWrapper}>
-        {products?.coffee && (
-          <ProductCarousel
-            {...forwardProps}
-            {...products.coffee}
-            slug={'coffee'}
+        {products?.coffee ? (
+          <GetComponent
+            data={{ ...forwardProps, ...products.coffee }}
+            COMPONENT_KEY={COMPONENT_KEYS.PRODUCT_CAROUSEL}
           />
-        )}
+        ) : null}
 
-        {products?.spirits && (
+        {products?.spirits ? (
           <ProductMasonryGrid
             {...forwardProps}
             {...products.spirits}
             slug={'spirits'}
           />
-        )}
+        ) : null}
 
         {categories ? (
           <CategoryCarousel
@@ -77,13 +81,13 @@ const HomeIndexScreen = ({
           />
         )}
 
-        {vendors?.all && (
+        {vendors?.all ? (
           <VendorCarousel
             {...forwardProps}
             title={'Recommended Stores'}
             vendors={vendors.all}
           />
-        )}
+        ) : null}
 
         <Button
           onPress={() => navigation.navigate(STACK_ROUTES.HOME.single_product)}

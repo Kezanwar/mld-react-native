@@ -14,7 +14,7 @@ import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts } from '../../utils/fonts'
 
 import { connect } from 'react-redux'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const CategoryCarouselCard = ({ navigation, dimensions, category, stack }) => {
   const { name, description, icon, slug } = category

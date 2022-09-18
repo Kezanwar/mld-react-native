@@ -18,7 +18,7 @@ import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const ProductMasonryGrid = ({
   stack,

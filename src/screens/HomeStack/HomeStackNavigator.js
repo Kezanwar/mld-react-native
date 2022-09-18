@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeIndexScreen from './HomeIndexScreen/HomeIndexScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 import { Text, View } from 'react-native'
 import HomeSingleProductScreen from './HomeSingleProductScreen/HomeSingleProductScreen'
 
@@ -20,8 +20,8 @@ const HomeStackNavigator = () => {
       <HomeStack.Screen
         options={{
           headerShown: false,
-          presentation: 'modal',
-          animationDuration: 100,
+          // presentation: 'modal',
+          // animationDuration: 100,
         }}
         name={STACK_ROUTES.HOME.single_product}
         component={HomeSingleProductScreen}

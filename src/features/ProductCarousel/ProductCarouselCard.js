@@ -14,7 +14,7 @@ import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cart.actions'
-import { STACK_ROUTES } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const ProductCarouselCard = ({
   dimensions,
