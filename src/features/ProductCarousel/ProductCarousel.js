@@ -1,20 +1,28 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
-import { fonts } from '../../utils/fonts'
 import ProductCarouselCard from './ProductCarouselCard'
-import ProductCategorySectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
+import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
-const ProductCarousel = ({ title, products, stackRoute, slug }) => {
+const ProductCarousel = ({ navigation, title, products, stack, slug }) => {
   return useMemo(() => {
     const dimensions = Dimensions.get('window')
+    const forwardProps = { stack, navigation }
     return (
       <View style={styles.carouselWrapper}>
-        <ProductCategorySectionTitle
+        <ProductSectionTitle
           slug={slug}
-          stackRoute={stackRoute}
+          navigateTo={
+            products
+              ? {
+                  route: STACK_ROUTES[stack].single_product,
+                  params: { slug: products.slug },
+                }
+              : null
+          }
+          navigation={navigation}
           title={title}
         />
         <ScrollView
@@ -32,13 +40,14 @@ const ProductCarousel = ({ title, products, stackRoute, slug }) => {
                   key={`product-${prod.id}`}
                   dimensions={dimensions}
                   prod={prod}
+                  {...forwardProps}
                 />
               )
             })}
         </ScrollView>
       </View>
     )
-  }, [title, products, stackRoute, slug])
+  }, [title, products, stack, slug])
 }
 
 const styles = StyleSheet.create({
@@ -57,9 +66,11 @@ const styles = StyleSheet.create({
 })
 
 ProductCarousel.propTypes = {
-  title: PropTypes.string,
-  products: PropTypes.arrayOf(PropTypes.object),
-  dimensions: PropTypes.object,
+  navigation: PropTypes.object.isRequired,
+  stack: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  slug: PropTypes.string,
 }
 
 export default ProductCarousel

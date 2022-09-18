@@ -15,7 +15,7 @@ import { spacing } from './src/utils/sizes'
 import { navigationRef } from './RootNavigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import BottomNavigation from './src/features/BottomNavigation/BottomNavigation'
-import { ROUTE_KEYS } from './constants/constants'
+import { STACK_ROUTES } from './constants/routes.constants'
 import HomeStackNavigator from './src/screens/HomeStack/HomeStackNavigator'
 import CartStackNavigator from './src/screens/CartStack/CartStackNavigator'
 import { colors } from './src/utils/colors'
@@ -76,22 +76,22 @@ export default function App() {
           >
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.HOME.stack}
+              name={STACK_ROUTES.HOME.stack}
               component={HomeStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.SEARCH.stack}
+              name={STACK_ROUTES.SEARCH.stack}
               component={SearchScreen}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.CART.stack}
+              name={STACK_ROUTES.CART.stack}
               component={CartStackNavigator}
             />
             <Tab.Screen
               options={{ headerShown: false }}
-              name={ROUTE_KEYS.PROFILE.stack}
+              name={STACK_ROUTES.PROFILE.stack}
               component={ProfileScreen}
             />
           </Tab.Navigator>

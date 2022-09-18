@@ -6,7 +6,7 @@ import { IconButton, Text } from 'react-native-paper'
 
 import { spacing, fontSizes } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
-import { ROUTE_KEYS } from '../../../constants/constants'
+import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
   const TabItem = useCallback(({ item, index }) => {
@@ -35,16 +35,16 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
 
     let icon = ''
     switch (item.name) {
-      case ROUTE_KEYS.HOME.stack:
+      case STACK_ROUTES.HOME.stack:
         icon = 'home'
         break
-      case ROUTE_KEYS.SEARCH.stack:
+      case STACK_ROUTES.SEARCH.stack:
         icon = 'magnify'
         break
-      case ROUTE_KEYS.CART.stack:
+      case STACK_ROUTES.CART.stack:
         icon = 'basket'
         break
-      case ROUTE_KEYS.PROFILE.stack:
+      case STACK_ROUTES.PROFILE.stack:
         icon = 'account'
         break
       default:
@@ -64,7 +64,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
           icon={icon}
           size={fontSizes.xl}
         />
-        {item.name === ROUTE_KEYS.CART.stack && (
+        {item.name === STACK_ROUTES.CART.stack && (
           <View style={styles.cartBadgeContainer}>
             <Text style={styles.cartBadge}>{cart.length}</Text>
           </View>

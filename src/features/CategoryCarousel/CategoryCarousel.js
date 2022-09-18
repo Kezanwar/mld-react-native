@@ -5,9 +5,10 @@ import StandardSectionTitle from '../../components/StandardSectionTitle/Standard
 import CategoryCarouselCard from './CategoryCarouselCard'
 import { spacing } from '../../utils/sizes'
 
-const CategoryCarousel = ({ title, categories }) => {
+const CategoryCarousel = ({ title, categories, stack, navigation }) => {
   return useMemo(() => {
     const dimensions = Dimensions.get('window')
+    const forwardProps = { stack, navigation }
     return (
       <View style={styles.carouselWrapper}>
         <StandardSectionTitle text={title} />
@@ -33,6 +34,7 @@ const CategoryCarousel = ({ title, categories }) => {
                       key={`category-card-${category.slug}`}
                       dimensions={dimensions}
                       category={category}
+                      {...forwardProps}
                     />
                   )
                 } else return null
