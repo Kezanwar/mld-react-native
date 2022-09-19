@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -7,7 +7,7 @@ import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScre
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 const SingleProduct = ({ product }) => {
-  if (product) return <ErrorMessage />
+  if (!product) return <ErrorMessage />
 
   const {
     id,
@@ -25,11 +25,9 @@ const SingleProduct = ({ product }) => {
     is_in_stock,
   } = product
 
-  return (
-    <ScrollScreenWrapper>
-      <Text>SingleProduct</Text>
-    </ScrollScreenWrapper>
-  )
+  console.log(images.map((i) => i.src))
+
+  return <ScrollScreenWrapper></ScrollScreenWrapper>
 }
 
 const styles = StyleSheet.create({})

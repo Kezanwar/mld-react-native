@@ -109,10 +109,10 @@ const GridItem = ({ index, item, addToCart, navigation, stack }) => {
         }
       >
         <View style={[styles.masonryGridItem, removeFirstTwoMarginTop(index)]}>
-          {images && images[0] && images[0].thumbnail && (
+          {images && images[0] && images[0] && (
             <Image
               style={[styles.productImage, { height: heights[0] }]}
-              source={{ uri: images[0].thumbnail }}
+              source={{ uri: images[0] }}
             />
           )}
           <View style={styles.productTitleWrapper}>
