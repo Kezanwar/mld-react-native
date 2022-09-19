@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { colors } from '../../utils/colors'
 import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScreenWrapper'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import SingleProductImageCarousel from '../SingleProductImageCarousel/SingleProductImageCarousel'
 
 const SingleProduct = ({ product }) => {
   if (!product) return <ErrorMessage />
@@ -27,7 +28,12 @@ const SingleProduct = ({ product }) => {
 
   console.log(images.map((i) => i.src))
 
-  return <ScrollScreenWrapper></ScrollScreenWrapper>
+  return (
+    <ScrollScreenWrapper>
+      <SingleProductImageCarousel images={images} />
+      <View></View>
+    </ScrollScreenWrapper>
+  )
 }
 
 const styles = StyleSheet.create({})
