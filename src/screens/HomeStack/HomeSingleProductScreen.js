@@ -2,12 +2,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { STACKS } from '../../../../constants/routes.constants'
-import { getHomeSingleProduct } from '../../../../redux/actions/home.actions'
+import { STACKS } from '../../../constants/routes.constants'
+import { getHomeSingleProduct } from '../../../redux/actions/home.actions'
 import { useEffect } from 'react'
-import { colors } from '../../../utils/colors'
+import { colors } from '../../utils/colors'
 import { ActivityIndicator } from 'react-native-paper'
-import SingleProduct from '../../../features/SingleProduct/SingleProduct'
+import SingleProduct from '../../features/SingleProduct/SingleProduct'
 
 const HomeSingleProductScreen = ({
   route,

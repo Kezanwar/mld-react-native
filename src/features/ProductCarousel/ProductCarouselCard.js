@@ -61,10 +61,10 @@ const ProductCarouselCard = ({
       <View
         style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}
       >
-        {images && images[0] && images[0].thumbnail && (
+        {images && images[0] && (
           <Image
             style={[styles.productImage, { height: dimensions.height * 0.3 }]}
-            source={{ uri: images[0].thumbnail }}
+            source={{ uri: images[0] }}
           />
         )}
 

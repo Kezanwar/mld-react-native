@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import PropTypes from 'prop-types'
 
-import ProductCarousel from '../../../features/ProductCarousel/ProductCarousel'
-import ProductMasonryGrid from '../../../features/ProductMasonryGrid/ProductMasonryGrid'
+import ProductCarousel from '../../features/ProductCarousel/ProductCarousel'
+import ProductMasonryGrid from '../../features/ProductMasonryGrid/ProductMasonryGrid'
+import CategoryCarousel from '../../features/CategoryCarousel/CategoryCarousel'
 
-import { colors } from '../../../utils/colors'
-import { STACKS, STACK_ROUTES } from '../../../../constants/routes.constants'
-
-import { addToCart } from '../../../../redux/actions/cart.actions'
-import { getProdsByCategories } from '../../../../redux/actions/products.actions'
-import { getAllVendors } from '../../../../redux/actions/vendors.actions'
-import { connect } from 'react-redux'
-import VendorCarousel from '../../../features/VendorsCarousel/VendorCarousel'
-import { Button } from 'react-native-paper'
-import { getCategories } from '../../../../redux/actions/categories.actions'
-import CategoryCarousel from '../../../features/CategoryCarousel/CategoryCarousel'
 import GetComponent, {
   COMPONENT_KEYS,
-} from '../../../../constants/components.constants'
+} from '../../../constants/components.constants'
+import { STACKS, STACK_ROUTES } from '../../../constants/routes.constants'
+
+import { addToCart } from '../../../redux/actions/cart.actions'
+import { getProdsByCategories } from '../../../redux/actions/products.actions'
+import { getAllVendors } from '../../../redux/actions/vendors.actions'
+import { connect } from 'react-redux'
+import VendorCarousel from '../../features/VendorsCarousel/VendorCarousel'
+import { Button } from 'react-native-paper'
+import { getCategories } from '../../../redux/actions/categories.actions'
+import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScreenWrapper'
 
 const HomeIndexScreen = ({
   products,
@@ -40,8 +39,6 @@ const HomeIndexScreen = ({
     getAllVendors()
   }, [])
 
-  console.log(vendors)
-
   const forwardProps = {
     navigation,
     stack: STACKS.HOME,
@@ -49,7 +46,7 @@ const HomeIndexScreen = ({
 
   return (
     <>
-      <ScrollView contentContainerStyle={styles.screenWrapper}>
+      <ScrollScreenWrapper>
         {products?.coffee ? (
           <GetComponent
             data={{ ...forwardProps, ...products.coffee }}
@@ -95,16 +92,10 @@ const HomeIndexScreen = ({
           single product
         </Button>
         {/* <Button onPress={() => console.log(categories)}>state</Button> */}
-      </ScrollView>
+      </ScrollScreenWrapper>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  screenWrapper: {
-    backgroundColor: colors.white,
-  },
-})
 
 const mapDispatchToProps = {
   addToCart,
