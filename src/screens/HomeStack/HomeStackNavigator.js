@@ -1,9 +1,9 @@
 import React from 'react'
-import HomeIndexScreen from './HomeIndexScreen/HomeIndexScreen'
+import HomeIndexScreen from './HomeIndexScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 import { Text, View } from 'react-native'
-import HomeSingleProductScreen from './HomeSingleProductScreen/HomeSingleProductScreen'
+import HomeSingleProductScreen from './HomeSingleProductScreen'
 
 const HomeStackNavigator = () => {
   const HomeStack = createNativeStackNavigator()
