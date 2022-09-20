@@ -63,7 +63,7 @@ const ProductCarouselCard = ({
       >
         {images && images[0] && (
           <Image
-            style={[styles.productImage, { height: dimensions.height * 0.3 }]}
+            style={[styles.productImage, { height: dimensions.height * 0.375 }]}
             source={{ uri: images[0] }}
           />
         )}
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   productImage: {
     marginBottom: spacing.lg,
     borderRadius: 10,
+    resizeMode: 'cover',
   },
   productTitle: {
     textAlign: 'center',
