@@ -85,13 +85,6 @@ const HomeIndexScreen = ({
             vendors={vendors.all}
           />
         ) : null}
-
-        <Button
-          onPress={() => navigation.navigate(STACK_ROUTES.HOME.single_product)}
-        >
-          single product
-        </Button>
-        {/* <Button onPress={() => console.log(categories)}>state</Button> */}
       </ScrollScreenWrapper>
     </>
   )

@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
 
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.m,
     paddingLeft: 10,
     fontFamily: fonts.light,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
   },
 })
 

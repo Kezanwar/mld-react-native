@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 
 import { connect } from 'react-redux'
 import PillList from '../../components/PillList/PillList'
@@ -59,14 +59,14 @@ const styles = StyleSheet.create({
     color: colors.d_grey,
     marginBottom: spacing.sm,
     fontFamily: fonts.light,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     letterSpacing: -0.75,
   },
   vendorLocation: {
     fontFamily: fonts.light,
     fontSize: 16,
     textAlign: 'center',
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     color: colors.m_grey,
     marginBottom: spacing.sm,
   },

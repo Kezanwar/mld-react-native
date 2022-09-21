@@ -13,8 +13,6 @@ export const COMPONENT_KEYS = {
 }
 
 const GetComponent = (props) => {
-  console.log(props)
-
   const { COMPONENT_KEY, data } = props
 
   if (!data) {

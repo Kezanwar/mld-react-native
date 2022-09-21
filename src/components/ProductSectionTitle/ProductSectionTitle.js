@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.light,
     color: colors.mld_red,
     fontSize: 55,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
   },
   arrowIcon: {
     marginTop: -10,

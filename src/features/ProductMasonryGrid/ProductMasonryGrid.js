@@ -12,7 +12,7 @@ import MasonryList from '@react-native-seoul/masonry-list'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 
 import { colors } from '../../utils/colors'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 import { fontSizes } from '../../utils/sizes'
 import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 
@@ -127,7 +127,7 @@ const GridItem = ({ index, item, addToCart, navigation, stack }) => {
           <Button
             onPress={handleAddToCart}
             labelStyle={{
-              textTransform: 'lowercase',
+              textTransform: textTransform,
               fontFamily: fonts.light,
               fontSize: fontSizes.m,
               letterSpacing: -0.2,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.light,
     letterSpacing: -0.4,
     textAlign: 'center',
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     marginBottom: 16,
   },
   productPrices: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.light,
     letterSpacing: -0.4,
     textAlign: 'center',
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     color: colors.mld_red,
     marginBottom: 10,
   },
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: fonts.light,
     fontSize: fontSizes.m,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     marginTop: 20,
     marginBottom: 20,
   },
