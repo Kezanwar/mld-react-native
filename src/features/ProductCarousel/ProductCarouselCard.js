@@ -8,7 +8,7 @@ import {
 import React, { useCallback, useState } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 import PropTypes from 'prop-types'
 import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
 import { Button } from 'react-native-paper'
@@ -78,7 +78,7 @@ const ProductCarouselCard = ({
         <Button
           onPress={handleAddToCart}
           labelStyle={{
-            textTransform: 'lowercase',
+            textTransform: textTransform,
             fontFamily: fonts.light,
             fontSize: fontSizes.m,
             letterSpacing: -0.2,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     color: colors.d_grey,
     marginBottom: spacing.lg,
     fontFamily: fonts.light,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     letterSpacing: -0.75,
   },
   price_range: {
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     color: colors.mld_red,
     marginBottom: spacing.sm,
     fontFamily: fonts.light,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     letterSpacing: -0.35,
   },
   add_to_cart: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.d_grey,
     fontFamily: fonts.light,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
     letterSpacing: -0.5,
   },
   shopGravatar: {

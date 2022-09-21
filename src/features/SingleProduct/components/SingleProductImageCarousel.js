@@ -8,10 +8,10 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { fonts } from '../../utils/fonts'
-import { fontSizes } from '../../utils/sizes'
-import { colors } from '../../utils/colors'
-import BackButton from '../../components/BackButton/BackButton'
+import { fonts } from '../../../utils/fonts'
+import { fontSizes } from '../../../utils/sizes'
+import { colors } from '../../../utils/colors'
+import BackButton from '../../../components/BackButton/BackButton'
 
 const SingleProductImageCarousel = ({ images }) => {
   if (!images || images.length === 0) return null
@@ -19,7 +19,7 @@ const SingleProductImageCarousel = ({ images }) => {
   const dimensions = Dimensions.get('window')
   const screenWidth = dimensions.width
 
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState('1')
 
   const canScroll = images.length > 1
 
@@ -72,6 +72,7 @@ const SingleProductImageCarousel = ({ images }) => {
 const styles = StyleSheet.create({
   imageCarousel: {
     justifyContent: 'flex-start',
+    // borderWidth: 1,
   },
   images: {
     resizeMode: 'contain',

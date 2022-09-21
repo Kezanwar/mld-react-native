@@ -15,7 +15,6 @@ const BackButton = ({ variant }) => {
     >
       <AntDesign
         name="arrowleft"
-        // style={styles.arrowIcon}
         size={variant === 'inPill' ? 14 : 16}
         color={colors.d_grey}
       />

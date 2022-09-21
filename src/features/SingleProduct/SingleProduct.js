@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { colors } from '../../utils/colors'
 import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScreenWrapper'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
-import SingleProductImageCarousel from '../SingleProductImageCarousel/SingleProductImageCarousel'
+import SingleProductImageCarousel from './components/SingleProductImageCarousel'
+import SingleProductTitleContainer from './components/SingleProductTitleContainer'
 
 const SingleProduct = ({ product }) => {
   if (!product) return <ErrorMessage />
@@ -26,12 +27,18 @@ const SingleProduct = ({ product }) => {
     is_in_stock,
   } = product
 
-  console.log(images.map((i) => i.src))
+  console.log(product)
 
   return (
     <ScrollScreenWrapper>
       <SingleProductImageCarousel images={images} />
-      <View></View>
+      <SingleProductTitleContainer
+        title={name}
+        price={prices}
+        short_description={short_description}
+        has_options={has_options}
+        variations={variations}
+      />
     </ScrollScreenWrapper>
   )
 }

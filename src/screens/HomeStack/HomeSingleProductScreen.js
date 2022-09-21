@@ -25,8 +25,6 @@ const HomeSingleProductScreen = ({
     if (id) getHomeSingleProduct(id)
   }, [])
 
-  console.log(product)
-
   if (isLoading) {
     return (
       <View style={styles.screenWrapper}>

@@ -9,3 +9,5 @@ export const letterSpacing = {
   md: -1,
   sm: 0.5,
 }
+
+export const textTransform = 'lowercase'

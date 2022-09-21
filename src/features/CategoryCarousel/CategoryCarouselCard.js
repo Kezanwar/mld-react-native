@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
-import { fonts } from '../../utils/fonts'
+import { fonts, textTransform } from '../../utils/fonts'
 
 import { connect } from 'react-redux'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     fontSize: 40,
     marginBottom: spacing.m,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
   },
   categoryDescription: {
     color: colors.m_grey,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     fontSize: fontSizes.lg,
     marginBottom: 36,
-    textTransform: 'lowercase',
+    textTransform: textTransform,
   },
   categoryIcon: {
     height: 80,
