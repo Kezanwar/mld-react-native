@@ -121,9 +121,7 @@ const GridItem = ({ index, item, addToCart, navigation, stack }) => {
             </Text>
           </View>
 
-          <Text style={styles.productPrices}>
-            {getPrices(prices, price_range)}
-          </Text>
+          <Text style={styles.productPrices}>{getPrices(prices)}</Text>
           <Button
             onPress={handleAddToCart}
             labelStyle={{

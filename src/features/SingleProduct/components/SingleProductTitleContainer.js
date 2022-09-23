@@ -4,36 +4,74 @@ import PropTypes from 'prop-types'
 import { colors } from '../../../utils/colors'
 import { fonts, textTransform } from '../../../utils/fonts'
 import { fontSizes, spacing } from '../../../utils/sizes'
-import { getPrices } from '../../../utils/prices'
+import { correctPriceWithCurrency, getPrices } from '../../../utils/prices'
 import CustomSelectDropdown from '../../../components/CustomSelectDropdown/CustomSelectDropdown'
 import { useState } from 'react'
+import { useMemo } from 'react'
+import QuantityController from '../../../components/QuantityController/QuantityController'
+import { useCallback } from 'react'
 
 const SingleProductTitleContainer = ({
   title,
-  price,
+  prices,
   short_description,
   has_options,
   variations,
+  is_in_stock,
 }) => {
-  const varOptions = variations?.map((v) => v.attributes[0].value)
-
   const [selectedVariation, setSelectedVariation] = useState(null)
-  const handleVariationSelect = (selectedItem, index) => {
-    setSelectedVariation(selectedItem)
-  }
+  const [quantity, setQuantity] = useState(0)
+
+  const outOfStock = 'out of stock'
+
+  const varOptions = useMemo(
+    () => variations?.map((v) => v.attributes[0].option) ?? null,
+    [has_options, variations]
+  )
+
+  const handleVariationSelect = useCallback(
+    (selectedItem, index) => {
+      setSelectedVariation({
+        name: selectedItem,
+        index: index,
+        price:
+          variations[index].stock_status === 'outofstock'
+            ? outOfStock
+            : variations[index].price,
+        variation_id: variations[index].id,
+      })
+    },
+    [variations]
+  )
+
+  console.log(selectedVariation)
+
+  const showPrices = useMemo(() => {
+    if (!is_in_stock) return outOfStock
+    if (!has_options || !selectedVariation)
+      return correctPriceWithCurrency(prices.price)
+    else return `£${selectedVariation.price}`
+  }, [selectedVariation, title])
 
   return (
     <View style={styles.singleProdTitleContainer}>
       <Text style={styles.singleProdTitle}>{title}</Text>
-      <Text style={styles.singleProdBody}>{getPrices(price)}</Text>
-      <View style={styles.singleProdOptionsContainer}>
-        {has_options && variations && (
-          <CustomSelectDropdown
-            onSelect={handleVariationSelect}
-            data={varOptions}
+      <Text style={styles.singleProdBody}>{showPrices}</Text>
+      {is_in_stock && (
+        <View style={styles.singleProdOptionsContainer}>
+          {has_options && variations && varOptions && (
+            <CustomSelectDropdown
+              onSelect={handleVariationSelect}
+              data={varOptions}
+            />
+          )}
+          <QuantityController
+            disabled={!!selectedVariation?.price === outOfStock}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
-        )}
-      </View>
+        </View>
+      )}
 
       <Text
         style={[

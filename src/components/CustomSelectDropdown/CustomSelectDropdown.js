@@ -33,7 +33,7 @@ const CustomSelectDropdown = ({ data, onSelect }) => {
 const styles = StyleSheet.create({
   selectButtonStyle: {
     backgroundColor: colors.d_grey,
-    borderRadius: 50,
+    borderRadius: 10,
   },
   selectButtonText: {
     color: colors.white,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   selectDropdownStyles: {
     backgroundColor: colors.d_grey,
-    borderRadius: 15,
+    borderRadius: 10,
   },
   selectRowTextStyle: {
     color: colors.white,
