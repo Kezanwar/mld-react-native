@@ -34,10 +34,11 @@ const SingleProduct = ({ product }) => {
       <SingleProductImageCarousel images={images} />
       <SingleProductTitleContainer
         title={name}
-        price={prices}
+        prices={prices}
         short_description={short_description}
         has_options={has_options}
         variations={variations}
+        is_in_stock={is_in_stock}
       />
     </ScrollScreenWrapper>
   )

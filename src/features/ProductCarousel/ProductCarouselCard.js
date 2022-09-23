@@ -74,7 +74,7 @@ const ProductCarouselCard = ({
         >
           {name}
         </Text>
-        <Text style={styles.price_range}>{getPrices(prices, price_range)}</Text>
+        <Text style={styles.price_range}>{getPrices(prices)}</Text>
         <Button
           onPress={handleAddToCart}
           labelStyle={{
