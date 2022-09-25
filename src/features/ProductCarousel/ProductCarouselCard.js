@@ -5,51 +5,21 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts, textTransform } from '../../utils/fonts'
 import PropTypes from 'prop-types'
-import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
-import { Button } from 'react-native-paper'
-import { connect } from 'react-redux'
-import { addToCart } from '../../../redux/actions/cart.actions'
+import { getPrices } from '../../utils/prices'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
-const ProductCarouselCard = ({
-  dimensions,
-  prod,
-  addToCart,
-  cart,
-  stack,
-  navigation,
-}) => {
+const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
   const { id, name, short_description, prices, store, images } = prod
   const { price_range } = prices
-  const [addToCartButtonData, setAddToCartButtonData] = useState({
-    icon: 'cart',
-    text: 'Add to cart',
-    color: colors.d_grey,
-  })
 
   const getDynamicFontSize = useCallback(() => {
     if (name.length > 20) return { fontSize: 24 }
     else return {}
-  }, [])
-
-  const handleAddToCart = useCallback(() => {
-    addToCart({
-      title: name,
-      product_id: id,
-      price: correctPriceWithCurrency(prices.price),
-    })
-    if (addToCartButtonData.icon !== 'check-circle') {
-      setAddToCartButtonData({
-        icon: 'check-circle',
-        text: 'Added',
-        color: 'green',
-      })
-    }
   }, [])
 
   return (
@@ -75,26 +45,6 @@ const ProductCarouselCard = ({
           {name}
         </Text>
         <Text style={styles.price_range}>{getPrices(prices)}</Text>
-        <Button
-          onPress={handleAddToCart}
-          labelStyle={{
-            textTransform: textTransform,
-            fontFamily: fonts.light,
-            fontSize: fontSizes.m,
-            letterSpacing: -0.2,
-            textDecorationLine: 'underline',
-          }}
-          contentStyle={{
-            // flexDirection: 'row-reverse',
-            padding: 4,
-            color: 'red',
-          }}
-          icon={addToCartButtonData.icon}
-          color={addToCartButtonData.color}
-          style={styles.add_to_cart}
-        >
-          {addToCartButtonData.text}
-        </Button>
 
         <View style={styles.storeDetailsContainer}>
           <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
@@ -186,12 +136,4 @@ ProductCarouselCard.propTypes = {
   addToCart: PropTypes.func,
 }
 
-const mapDispatchToProps = {
-  addToCart,
-}
-
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCarouselCard)
+export default ProductCarouselCard

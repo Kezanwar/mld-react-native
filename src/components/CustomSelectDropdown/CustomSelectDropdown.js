@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
   selectButtonStyle: {
     backgroundColor: colors.d_grey,
     borderRadius: 10,
+    flex: 1,
+    height: 42,
   },
   selectButtonText: {
     color: colors.white,
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
   searchInputStyle: {
     padding: 0,
   },
-  selectIconStyle: { marginRight: 10, marginTop: -3 },
+  selectIconStyle: { marginTop: -3 },
 })
 
 CustomSelectDropdown.propTypes = {

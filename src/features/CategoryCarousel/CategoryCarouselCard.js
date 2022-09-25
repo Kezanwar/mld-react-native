@@ -13,7 +13,6 @@ import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { fonts, textTransform } from '../../utils/fonts'
 
-import { connect } from 'react-redux'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const CategoryCarouselCard = ({ navigation, dimensions, category, stack }) => {
@@ -107,11 +106,4 @@ CategoryCarouselCard.propTypes = {
   dimensions: PropTypes.object,
 }
 
-const mapDispatchToProps = {}
-
-const mapStateToProps = (state) => ({})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CategoryCarouselCard)
+export default CategoryCarouselCard
