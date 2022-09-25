@@ -35,7 +35,7 @@ const QuantityController = ({ quantity, setQuantity }) => {
 
 const styles = StyleSheet.create({
   quantityControllerContainer: {
-    marginBottom: 10,
+    marginBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },

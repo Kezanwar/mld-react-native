@@ -35,28 +35,35 @@ const CustomAddToCartBtn = ({
   }, [])
 
   return (
-    <Button
-      onPress={handleAddToCart}
-      labelStyle={{
-        textTransform: textTransform,
-        fontFamily: fonts.light,
-        fontSize: fontSizes.m,
-        letterSpacing: -0.2,
-        textDecorationLine: 'underline',
-      }}
-      contentStyle={{
-        padding: 4,
-      }}
-      icon={addToCartButtonData.icon}
-      color={addToCartButtonData.color}
-      style={styles.add_to_cart}
-    >
-      {addToCartButtonData.text}
-    </Button>
+    <View style={styles.addCartContainer}>
+      <Button
+        onPress={handleAddToCart}
+        labelStyle={{
+          textTransform: textTransform,
+          fontFamily: fonts.light,
+          fontSize: fontSizes.m,
+          letterSpacing: -0.2,
+          textDecorationLine: 'underline',
+        }}
+        contentStyle={{
+          padding: 4,
+        }}
+        icon={addToCartButtonData.icon}
+        color={addToCartButtonData.color}
+        style={styles.add_to_cart}
+      >
+        {addToCartButtonData.text}
+      </Button>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  addCartContainer: {
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: colors.d_grey,
+  },
   add_to_cart: {
     color: colors.white,
     borderRadius: 100,

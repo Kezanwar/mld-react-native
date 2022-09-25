@@ -37,24 +37,24 @@ const SingleProductTitleContainer = ({
   return (
     <View style={styles.singleProdTitleContainer}>
       <Text style={styles.singleProdTitle}>{name}</Text>
-      {has_options ? (
-        <SingleProdVariablePricingOptionsAddToCart {...pricingOptionProps} />
-      ) : (
-        <SingleProdSimplePricingOptionsAddToCart {...pricingOptionProps} />
-      )}
       <Text
         style={[
           styles.singleProdBody,
           {
             color: colors.m_grey,
             lineHeight: 21,
-            marginBottom: 0,
+            marginBottom: 20,
             fontSize: fontSizes.ml,
           },
         ]}
       >
         {short_description}
       </Text>
+      {has_options ? (
+        <SingleProdVariablePricingOptionsAddToCart {...pricingOptionProps} />
+      ) : (
+        <SingleProdSimplePricingOptionsAddToCart {...pricingOptionProps} />
+      )}
     </View>
   )
 }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   singleProdTitleContainer: {
     backgroundColor: colors.l_grey,
     paddingHorizontal: 15,
-    paddingVertical: 20,
+    paddingTop: 20,
     borderTopStartRadius: 12,
     borderTopEndRadius: 12,
     borderRadius: 20,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.light,
     fontSize: fontSizes.xl,
     letterSpacing: -0.4,
-    marginBottom: spacing.m,
+    marginBottom: spacing.sm,
     textTransform: textTransform,
   },
   singleProdBody: {
@@ -83,9 +83,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     marginBottom: spacing.m,
     textTransform: textTransform,
-  },
-  singleProdOptionsContainer: {
-    marginBottom: spacing.lg,
   },
 })
 
