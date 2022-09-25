@@ -36,7 +36,7 @@ const SingleProdVariablePricingOptionsAddToCart = ({
 
   const selectedValues = useMemo(() => {
     return selectedAttributes.map((s_att, index) => s_att.value)
-  }, [id, selectedAttributes])
+  }, [id, name, selectedAttributes])
 
   const attributeOptions = useMemo(
     () =>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   singleProdBody: {
     color: colors.mld_red,
     fontFamily: fonts.light,
-    fontSize: fontSizes.lg,
+    fontSize: fontSizes.lg - 2,
     letterSpacing: -0.4,
     marginBottom: spacing.m,
     textTransform: textTransform,
