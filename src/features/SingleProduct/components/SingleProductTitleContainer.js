@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   singleProdTitle: {
     fontFamily: fonts.light,
-    fontSize: fontSizes.xl,
+    fontSize: fontSizes.xl + 2,
     letterSpacing: -0.4,
     marginBottom: spacing.sm,
     textTransform: textTransform,

@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   singleProdBody: {
     color: colors.mld_red,
     fontFamily: fonts.light,
-    fontSize: fontSizes.lg,
+    fontSize: fontSizes.lg - 2,
     letterSpacing: -0.4,
     marginBottom: spacing.m,
     textTransform: textTransform,
