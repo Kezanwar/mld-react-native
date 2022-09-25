@@ -36,7 +36,7 @@ const SingleProdVariablePricingOptionsAddToCart = ({
 
   const selectedValues = useMemo(() => {
     return selectedAttributes.map((s_att, index) => s_att.value)
-  }, [id, selectedAttributes])
+  }, [id, name, selectedAttributes])
 
   const attributeOptions = useMemo(
     () =>
