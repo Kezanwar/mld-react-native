@@ -23,23 +23,28 @@ const SingleProduct = ({ product }) => {
     tags,
     type,
     store,
+    attributes,
     variations,
     is_in_stock,
   } = product
 
   console.log(product)
 
+  const titlePriceAndOptionsProps = {
+    id,
+    name,
+    prices,
+    short_description,
+    has_options,
+    attributes,
+    variations,
+    is_in_stock,
+  }
+
   return (
     <ScrollScreenWrapper>
       <SingleProductImageCarousel images={images} />
-      <SingleProductTitleContainer
-        title={name}
-        prices={prices}
-        short_description={short_description}
-        has_options={has_options}
-        variations={variations}
-        is_in_stock={is_in_stock}
-      />
+      <SingleProductTitleContainer {...titlePriceAndOptionsProps} />
     </ScrollScreenWrapper>
   )
 }

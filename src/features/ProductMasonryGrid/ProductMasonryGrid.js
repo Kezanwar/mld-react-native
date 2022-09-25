@@ -7,7 +7,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { Button } from 'react-native-paper'
 import MasonryList from '@react-native-seoul/masonry-list'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 
@@ -15,19 +14,9 @@ import { colors } from '../../utils/colors'
 import { fonts, textTransform } from '../../utils/fonts'
 import { fontSizes } from '../../utils/sizes'
 import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
-
-import { connect } from 'react-redux'
-import { addToCart } from '../../../redux/actions/cart.actions'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
-const ProductMasonryGrid = ({
-  stack,
-  products,
-  title,
-  slug,
-  addToCart,
-  navigation,
-}) => {
+const ProductMasonryGrid = ({ stack, products, title, slug, navigation }) => {
   return useMemo(() => {
     const forwardProps = { navigation, stack }
     return (
@@ -50,12 +39,7 @@ const ProductMasonryGrid = ({
           data={products.slice(6, 12)}
           keyExtractor={(item) => item.id}
           renderItem={({ item, i }) => (
-            <GridItem
-              {...forwardProps}
-              index={i}
-              addToCart={addToCart}
-              item={item}
-            />
+            <GridItem {...forwardProps} index={i} item={item} />
           )}
         />
       </View>
@@ -63,33 +47,12 @@ const ProductMasonryGrid = ({
   }, [products, title, stack, slug])
 }
 
-const GridItem = ({ index, item, addToCart, navigation, stack }) => {
-  const { id, name, short_description, prices, store, images } = item
+const GridItem = ({ index, item, navigation, stack }) => {
+  const { id, name, prices, store, images } = item
   const { price_range } = prices
 
   const heights = [220, 170, 140]
   const random = Math.floor(Math.random() * heights.length)
-
-  const [addToCartButtonData, setAddToCartButtonData] = useState({
-    icon: 'cart',
-    text: 'Add to cart',
-    color: colors.d_grey,
-  })
-
-  const handleAddToCart = useCallback(() => {
-    addToCart({
-      title: name,
-      product_id: id,
-      price: correctPriceWithCurrency(prices.price),
-    })
-    if (addToCartButtonData.icon !== 'check-circle') {
-      setAddToCartButtonData({
-        icon: 'check-circle',
-        text: 'Added',
-        color: 'green',
-      })
-    }
-  }, [])
 
   const getDynamicFontSize = useCallback((name) => {
     if (name.length > 16) return { fontSize: 15 }
@@ -122,26 +85,6 @@ const GridItem = ({ index, item, addToCart, navigation, stack }) => {
           </View>
 
           <Text style={styles.productPrices}>{getPrices(prices)}</Text>
-          <Button
-            onPress={handleAddToCart}
-            labelStyle={{
-              textTransform: textTransform,
-              fontFamily: fonts.light,
-              fontSize: fontSizes.m,
-              letterSpacing: -0.2,
-              textDecorationLine: 'underline',
-            }}
-            contentStyle={{
-              // flexDirection: 'row-reverse',
-              padding: 4,
-              color: 'red',
-            }}
-            icon={addToCartButtonData.icon}
-            color={addToCartButtonData.color}
-            style={styles.add_to_cart}
-          >
-            {addToCartButtonData.text}
-          </Button>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.productStoreDetailsContainer}>
@@ -229,12 +172,6 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapDispatchToProps = {
-  addToCart,
-}
-
-const mapStateToProps = (state) => ({})
-
 ProductMasonryGrid.propTypes = {
   title: PropTypes.string.isRequired,
   products: PropTypes.array.isRequired,
@@ -243,4 +180,4 @@ ProductMasonryGrid.propTypes = {
   addToCart: PropTypes.func,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductMasonryGrid)
+export default ProductMasonryGrid
