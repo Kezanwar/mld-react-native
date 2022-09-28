@@ -79,7 +79,7 @@ const SingleProdVariablePricingOptionsAddToCart = ({
         return newAttributes
       })
     },
-    [id, name]
+    [id, name, selectedAttributes]
   )
 
   const selectedVariation = useMemo(() => {
