@@ -30,7 +30,7 @@ const SingleProdSimplePricingOptionsAddToCart = (props) => {
       {is_in_stock && (
         <View style={styles.singleProdOptionsContainer}>
           <QuantityController variant={'simple-product'} quantity={quantity} setQuantity={setQuantity} />
-          <CustomAddToCartBtn productId={id} productToAdd={quantity > 0 ? context : null} />
+          <CustomAddToCartBtn productId={id} quantity={quantity} productToAdd={context} />
         </View>
       )}
     </>

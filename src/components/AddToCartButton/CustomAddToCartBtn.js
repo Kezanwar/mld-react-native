@@ -10,17 +10,19 @@ import { addToCart } from '../../../redux/actions/cart.actions'
 import { useCallback } from 'react'
 import { Button } from 'react-native-paper'
 
-const CustomAddToCartBtn = ({ addToCart, productToAdd }) => {
+const CustomAddToCartBtn = ({ addToCart, productToAdd, quantity }) => {
   const [addToCartButtonData, setAddToCartButtonData] = useState({
     icon: 'cart',
     text: 'Add to cart',
     color: colors.d_grey,
   })
 
+  console.log(quantity)
+
   // productToAdd is used as a enabled/disabled source of truth for the add to cart
 
   const handleAddToCart = useCallback(() => {
-    if (!productToAdd) return
+    if (quantity < 1 || !productToAdd) return
     addToCart(productToAdd)
     if (addToCartButtonData.icon !== 'check-circle') {
       setAddToCartButtonData({
@@ -29,7 +31,7 @@ const CustomAddToCartBtn = ({ addToCart, productToAdd }) => {
         color: 'green',
       })
     }
-  }, [productToAdd])
+  }, [productToAdd, quantity])
 
   return (
     <View style={styles.addCartContainer}>

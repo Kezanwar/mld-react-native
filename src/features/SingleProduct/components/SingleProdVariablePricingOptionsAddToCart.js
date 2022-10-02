@@ -114,10 +114,9 @@ const SingleProdVariablePricingOptionsAddToCart = () => {
           />
           <CustomAddToCartBtn
             productId={id}
+            quantity={quantity}
             productToAdd={
-              selectedVariation && quantity > 0
-                ? { ...selectedVariation, mld_is_a_variation: true, mld_parent_product_id: id }
-                : null
+              selectedVariation ? { ...selectedVariation, mld_is_a_variation: true, mld_parent_product_id: id } : null
             }
           />
         </View>
