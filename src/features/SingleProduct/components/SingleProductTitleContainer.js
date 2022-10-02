@@ -6,27 +6,13 @@ import { fonts, textTransform } from '../../../utils/fonts'
 import { fontSizes, spacing } from '../../../utils/sizes'
 import SingleProdVariablePricingOptionsAddToCart from './SingleProdVariablePricingOptionsAddToCart'
 import SingleProdSimplePricingOptionsAddToCart from './SingleProdSimplePricingOptionsAddToCart'
+import { useContext } from 'react'
+import SingleProductContext from '../SingleProductContext'
 
-const SingleProductTitleContainer = ({
-  id,
-  name,
-  prices,
-  short_description,
-  has_options,
-  variations,
-  is_in_stock,
-  attributes,
-}) => {
-  const pricingOptionProps = {
-    name,
-    prices,
-    id,
-    has_options,
-    variations,
-    is_in_stock,
-    attributes,
-  }
+const SingleProductTitleContainer = () => {
+  const { name, short_description, has_options } = useContext(SingleProductContext)
 
+  if (!name || !short_description) return null
   return (
     <View style={styles.singleProdTitleContainer}>
       <Text style={styles.singleProdTitle}>{name}</Text>
@@ -43,11 +29,7 @@ const SingleProductTitleContainer = ({
       >
         {short_description}
       </Text>
-      {has_options ? (
-        <SingleProdVariablePricingOptionsAddToCart {...pricingOptionProps} />
-      ) : (
-        <SingleProdSimplePricingOptionsAddToCart {...pricingOptionProps} />
-      )}
+      {has_options ? <SingleProdVariablePricingOptionsAddToCart /> : <SingleProdSimplePricingOptionsAddToCart />}
     </View>
   )
 }

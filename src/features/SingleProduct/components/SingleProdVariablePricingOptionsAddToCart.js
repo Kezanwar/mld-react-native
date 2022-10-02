@@ -10,18 +10,16 @@ import { fonts, textTransform } from '../../../utils/fonts'
 import { useState } from 'react'
 import { useMemo } from 'react'
 import { useCallback } from 'react'
-import { correctPriceWithCurrency, getPrices } from '../../../utils/prices'
+import { getPrices } from '../../../utils/prices'
 import CustomAddToCartBtn from '../../../components/AddToCartButton/CustomAddToCartBtn'
+import { useContext } from 'react'
+import SingleProductContext from '../SingleProductContext'
 
-const SingleProdVariablePricingOptionsAddToCart = ({
-  id,
-  name,
-  prices,
-  has_options,
-  variations,
-  is_in_stock,
-  attributes,
-}) => {
+const SingleProdVariablePricingOptionsAddToCart = () => {
+  if (!SingleProductContext) return null
+
+  const { id, name, prices, has_options, variations, is_in_stock, attributes } = useContext(SingleProductContext)
+
   const [selectedAttributes, setSelectedAttributes] = useState(
     attributes && attributes.length > 0
       ? attributes?.map((attr) => ({
@@ -30,6 +28,7 @@ const SingleProdVariablePricingOptionsAddToCart = ({
         }))
       : []
   )
+
   const [quantity, setQuantity] = useState(1)
   const outOfStock = 'out of stock'
   const selectAnOption = 'select an option.'
@@ -46,20 +45,14 @@ const SingleProdVariablePricingOptionsAddToCart = ({
             const otherAttributeSelectedValues = selectedValues.filter(
               (s_vals, selectedIndex) => selectedIndex !== index
             )
+            const otherSelectedValuesExists = otherAttributeSelectedValues.some((v) => v !== '')
             let newOptionsData = attr.terms.map((t) => t.name)
-            const otherSelectedValuesExists = otherAttributeSelectedValues.some(
-              (v) => v !== ''
-            )
             if (otherSelectedValuesExists && attributes.length !== 1) {
               const availableVariationsLeft = variations.filter((v) =>
-                v.attributes.some((attr) =>
-                  otherAttributeSelectedValues.includes(attr.option)
-                )
+                v.attributes.some((attr) => otherAttributeSelectedValues.includes(attr.option))
               )
               newOptionsData = newOptionsData.filter((option) =>
-                availableVariationsLeft.some((v) =>
-                  v.attributes.some((attr) => attr.option === option)
-                )
+                availableVariationsLeft.some((v) => v.attributes.some((attr) => attr.option === option))
               )
             }
             return {
@@ -86,19 +79,16 @@ const SingleProdVariablePricingOptionsAddToCart = ({
     const allSelected = selectedValues.every((v) => v !== '')
     if (!allSelected) return null
     const selectedVar = variations.find((v) =>
-      v.attributes.every((attr) =>
-        selectedValues.some((sv) => sv === attr.option)
-      )
+      v.attributes.every((attr) => selectedValues.some((sv) => sv === attr.option))
     )
     return selectedVar
-  }, [id, name, selectedAttributes])
+  }, [id, name, selectedAttributes, selectedValues])
 
   const showPrices = useMemo(() => {
     if (!selectedVariation) return getPrices(prices, is_in_stock)
     else return `£${selectedVariation.price}`
   }, [id, selectedAttributes, name])
 
-  console.log(selectedVariation)
   return (
     <>
       <Text style={styles.singleProdBody}>{showPrices}</Text>
@@ -123,9 +113,12 @@ const SingleProdVariablePricingOptionsAddToCart = ({
             setQuantity={setQuantity}
           />
           <CustomAddToCartBtn
-            disabled={!!selectedVariation?.price === outOfStock && quantity > 0}
             productId={id}
-            productCartData={selectedVariation}
+            productToAdd={
+              selectedVariation && quantity > 0
+                ? { ...selectedVariation, mld_is_a_variation: true, mld_parent_product_id: id }
+                : null
+            }
           />
         </View>
       )}
@@ -153,7 +146,4 @@ const mapStateToProps = (state) => ({})
 
 SingleProdVariablePricingOptionsAddToCart.propTypes = {}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleProdVariablePricingOptionsAddToCart)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProdVariablePricingOptionsAddToCart)

@@ -10,21 +10,18 @@ import { addToCart } from '../../../redux/actions/cart.actions'
 import { useCallback } from 'react'
 import { Button } from 'react-native-paper'
 
-const CustomAddToCartBtn = ({
-  disabled,
-  addToCart,
-  productCartData,
-  productId,
-}) => {
+const CustomAddToCartBtn = ({ addToCart, productToAdd }) => {
   const [addToCartButtonData, setAddToCartButtonData] = useState({
     icon: 'cart',
     text: 'Add to cart',
     color: colors.d_grey,
   })
 
+  // productToAdd is used as a enabled/disabled source of truth for the add to cart
+
   const handleAddToCart = useCallback(() => {
-    if (disabled || !productCartData) return
-    addToCart(productCartData)
+    if (!productToAdd) return
+    addToCart(productToAdd)
     if (addToCartButtonData.icon !== 'check-circle') {
       setAddToCartButtonData({
         icon: 'check-circle',
@@ -32,7 +29,7 @@ const CustomAddToCartBtn = ({
         color: 'green',
       })
     }
-  }, [])
+  }, [productToAdd])
 
   return (
     <View style={styles.addCartContainer}>
@@ -79,10 +76,8 @@ const mapStateToProps = (state) => ({
 })
 
 CustomAddToCartBtn.propTypes = {
-  productCartData: PropTypes.object,
-  productId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  disabled: PropTypes.bool,
+  productToAdd: PropTypes.object,
+  productId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomAddToCartBtn)
