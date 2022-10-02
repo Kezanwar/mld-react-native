@@ -48,7 +48,7 @@ const ProductMasonryGrid = ({ stack, products, title, slug, navigation }) => {
 }
 
 const GridItem = ({ index, item, navigation, stack }) => {
-  const { id, name, prices, store, images } = item
+  const { id, name, prices, store, images, is_in_stock } = item
   const { price_range } = prices
 
   const heights = [220, 170, 140]
@@ -84,7 +84,9 @@ const GridItem = ({ index, item, navigation, stack }) => {
             </Text>
           </View>
 
-          <Text style={styles.productPrices}>{getPrices(prices)}</Text>
+          <Text style={styles.productPrices}>
+            {getPrices(prices, is_in_stock)}
+          </Text>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.productStoreDetailsContainer}>

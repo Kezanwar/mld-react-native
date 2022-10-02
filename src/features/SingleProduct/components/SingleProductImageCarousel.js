@@ -1,19 +1,16 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  FlatList,
-} from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Dimensions, Image, FlatList } from 'react-native'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { fonts } from '../../../utils/fonts'
 import { fontSizes } from '../../../utils/sizes'
 import { colors } from '../../../utils/colors'
 import BackButton from '../../../components/BackButton/BackButton'
+import SingleProductContext from '../SingleProductContext'
 
-const SingleProductImageCarousel = ({ images }) => {
+const SingleProductImageCarousel = (props) => {
+  const context = useContext(SingleProductContext)
+  const { images } = context
+
   if (!images || images.length === 0) return null
 
   const dimensions = Dimensions.get('window')
@@ -24,8 +21,7 @@ const SingleProductImageCarousel = ({ images }) => {
   const canScroll = images.length > 1
 
   const handleScroll = (e) => {
-    if (canScroll)
-      setCount(parseInt(e.nativeEvent.contentOffset.x / screenWidth + 1))
+    if (canScroll) setCount(parseInt(e.nativeEvent.contentOffset.x / screenWidth + 1))
   }
 
   const carouselLength = images.length
@@ -58,9 +54,7 @@ const SingleProductImageCarousel = ({ images }) => {
         keyExtractor={(item) => item}
       />
       <View style={styles.countIndicatorWrapper}>
-        <Text
-          style={styles.countIndicator}
-        >{`${count} / ${carouselLength}`}</Text>
+        <Text style={styles.countIndicator}>{`${count} / ${carouselLength}`}</Text>
       </View>
       <View style={styles.backButtonWrapper}>
         <BackButton variant={'inPill'} />
@@ -99,8 +93,6 @@ const styles = StyleSheet.create({
   },
 })
 
-SingleProductImageCarousel.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
+SingleProductImageCarousel.propTypes = {}
 
 export default SingleProductImageCarousel

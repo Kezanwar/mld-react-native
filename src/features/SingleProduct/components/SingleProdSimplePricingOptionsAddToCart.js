@@ -2,30 +2,26 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import SingleProductAttributeSelect from './SingleProductAttributeSelect'
 import QuantityController from '../../../components/QuantityController/QuantityController'
 import { colors } from '../../../utils/colors'
 import { fontSizes, spacing } from '../../../utils/sizes'
 import { fonts, textTransform } from '../../../utils/fonts'
 import { useState } from 'react'
 import { useMemo } from 'react'
-import { useCallback } from 'react'
-import { correctPriceWithCurrency, getPrices } from '../../../utils/prices'
+import { getPrices } from '../../../utils/prices'
+import CustomAddToCartBtn from '../../../components/AddToCartButton/CustomAddToCartBtn'
+import SingleProductContext from '../SingleProductContext'
+import { useContext } from 'react'
 
-const SingleProdSimplePricingOptionsAddToCart = ({
-  id,
-  name,
-  prices,
-  has_options,
+const SingleProdSimplePricingOptionsAddToCart = (props) => {
+  if (!SingleProductContext) return null
+  const context = useContext(SingleProductContext)
+  const { id, name, prices, is_in_stock } = context
 
-  is_in_stock,
-}) => {
-  const [quantity, setQuantity] = useState(0)
-  const outOfStock = 'out of stock'
+  const [quantity, setQuantity] = useState(1)
 
   const showPrices = useMemo(() => {
-    if (!is_in_stock) return outOfStock
-    else return getPrices(prices)
+    return getPrices(prices, is_in_stock)
   }, [name])
 
   return (
@@ -33,7 +29,8 @@ const SingleProdSimplePricingOptionsAddToCart = ({
       <Text style={styles.singleProdBody}>{showPrices}</Text>
       {is_in_stock && (
         <View style={styles.singleProdOptionsContainer}>
-          <QuantityController quantity={quantity} setQuantity={setQuantity} />
+          <QuantityController variant={'simple-product'} quantity={quantity} setQuantity={setQuantity} />
+          <CustomAddToCartBtn productId={id} quantity={quantity} productToAdd={context} />
         </View>
       )}
     </>
@@ -60,7 +57,4 @@ const mapStateToProps = (state) => ({})
 
 SingleProdSimplePricingOptionsAddToCart.propTypes = {}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SingleProdSimplePricingOptionsAddToCart)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProdSimplePricingOptionsAddToCart)

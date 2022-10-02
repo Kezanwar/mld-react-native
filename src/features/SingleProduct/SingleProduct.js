@@ -7,45 +7,20 @@ import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScre
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import SingleProductImageCarousel from './components/SingleProductImageCarousel'
 import SingleProductTitleContainer from './components/SingleProductTitleContainer'
+import SingleProductContext from './SingleProductContext'
 
 const SingleProduct = ({ product }) => {
   if (!product) return <ErrorMessage />
 
-  const {
-    id,
-    name,
-    description,
-    short_description,
-    images,
-    has_options,
-    on_sale,
-    prices,
-    tags,
-    type,
-    store,
-    attributes,
-    variations,
-    is_in_stock,
-  } = product
-
   console.log(product)
 
-  const titlePriceAndOptionsProps = {
-    id,
-    name,
-    prices,
-    short_description,
-    has_options,
-    attributes,
-    variations,
-    is_in_stock,
-  }
-
   return (
-    <ScrollScreenWrapper>
-      <SingleProductImageCarousel images={images} />
-      <SingleProductTitleContainer {...titlePriceAndOptionsProps} />
-    </ScrollScreenWrapper>
+    <SingleProductContext.Provider value={product}>
+      <ScrollScreenWrapper>
+        <SingleProductImageCarousel />
+        <SingleProductTitleContainer />
+      </ScrollScreenWrapper>
+    </SingleProductContext.Provider>
   )
 }
 
