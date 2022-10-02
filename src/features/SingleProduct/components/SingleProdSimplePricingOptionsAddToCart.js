@@ -21,11 +21,9 @@ const SingleProdSimplePricingOptionsAddToCart = ({
   is_in_stock,
 }) => {
   const [quantity, setQuantity] = useState(0)
-  const outOfStock = 'out of stock'
 
   const showPrices = useMemo(() => {
-    if (!is_in_stock) return outOfStock
-    else return getPrices(prices)
+    return getPrices(prices, is_in_stock)
   }, [name])
 
   return (

@@ -94,8 +94,7 @@ const SingleProdVariablePricingOptionsAddToCart = ({
   }, [id, name, selectedAttributes])
 
   const showPrices = useMemo(() => {
-    if (!is_in_stock) return outOfStock
-    if (!selectedVariation) return getPrices(prices)
+    if (!selectedVariation) return getPrices(prices, is_in_stock)
     else return `£${selectedVariation.price}`
   }, [id, selectedAttributes, name])
 

@@ -14,7 +14,8 @@ import { getPrices } from '../../utils/prices'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
-  const { id, name, short_description, prices, store, images } = prod
+  const { id, name, short_description, prices, store, images, is_in_stock } =
+    prod
   const { price_range } = prices
 
   const getDynamicFontSize = useCallback(() => {
@@ -44,7 +45,7 @@ const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
         >
           {name}
         </Text>
-        <Text style={styles.price_range}>{getPrices(prices)}</Text>
+        <Text style={styles.price_range}>{getPrices(prices, is_in_stock)}</Text>
 
         <View style={styles.storeDetailsContainer}>
           <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
