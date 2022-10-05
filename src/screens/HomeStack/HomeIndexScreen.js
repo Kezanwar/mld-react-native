@@ -6,9 +6,7 @@ import ProductCarousel from '../../features/ProductCarousel/ProductCarousel'
 import ProductMasonryGrid from '../../features/ProductMasonryGrid/ProductMasonryGrid'
 import CategoryCarousel from '../../features/CategoryCarousel/CategoryCarousel'
 
-import GetComponent, {
-  COMPONENT_KEYS,
-} from '../../../constants/components.constants'
+import GetComponent, { COMPONENT_KEYS } from '../../../constants/components.constants'
 import { STACKS, STACK_ROUTES } from '../../../constants/routes.constants'
 
 import { addToCart } from '../../../redux/actions/cart.actions'
@@ -19,6 +17,7 @@ import VendorCarousel from '../../features/VendorsCarousel/VendorCarousel'
 import { Button } from 'react-native-paper'
 import { getCategories } from '../../../redux/actions/categories.actions'
 import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScreenWrapper'
+import SectionWrapper from '../../components/SectionWrapper/SectionWrapper'
 
 const HomeIndexScreen = ({
   products,
@@ -54,37 +53,15 @@ const HomeIndexScreen = ({
           />
         ) : null}
 
-        {products?.spirits ? (
-          <ProductMasonryGrid
-            {...forwardProps}
-            {...products.spirits}
-            slug={'spirits'}
-          />
-        ) : null}
+        {products?.spirits ? <ProductMasonryGrid {...forwardProps} {...products.spirits} slug={'spirits'} /> : null}
 
-        {categories ? (
-          <CategoryCarousel
-            {...forwardProps}
-            title={'Browse Categories'}
-            categories={categories}
-          />
-        ) : null}
+        {categories ? <CategoryCarousel {...forwardProps} title={'Browse Categories'} categories={categories} /> : null}
 
         {products?.award_winners && (
-          <ProductCarousel
-            {...forwardProps}
-            {...products.award_winners}
-            slug={'award-winners'}
-          />
+          <ProductCarousel {...forwardProps} {...products.award_winners} slug={'award-winners'} />
         )}
 
-        {vendors?.all ? (
-          <VendorCarousel
-            {...forwardProps}
-            title={'Recommended Stores'}
-            vendors={vendors.all}
-          />
-        ) : null}
+        {vendors?.all ? <VendorCarousel {...forwardProps} title={'Recommended Stores'} vendors={vendors.all} /> : null}
       </ScrollScreenWrapper>
     </>
   )
