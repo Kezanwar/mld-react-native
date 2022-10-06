@@ -9,7 +9,7 @@ import SingleProdSimplePricingOptionsAddToCart from './SingleProdSimplePricingOp
 import { useContext } from 'react'
 import SingleProductContext from '../SingleProductContext'
 
-const SingleProductTitleContainer = () => {
+const SingleProductTitleAndOptionsContainer = () => {
   const { name, short_description, has_options } = useContext(SingleProductContext)
 
   if (!name || !short_description) return null
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   },
 })
 
-SingleProductTitleContainer.propTypes = {}
+SingleProductTitleAndOptionsContainer.propTypes = {}
 
-export default SingleProductTitleContainer
+export default SingleProductTitleAndOptionsContainer
