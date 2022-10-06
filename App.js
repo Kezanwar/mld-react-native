@@ -1,11 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import configureStore from './redux/store'
@@ -79,21 +73,13 @@ export default function App() {
               name={STACK_ROUTES.HOME.stack}
               component={HomeStackNavigator}
             />
-            <Tab.Screen
-              options={{ headerShown: false }}
-              name={STACK_ROUTES.SEARCH.stack}
-              component={SearchScreen}
-            />
+            <Tab.Screen options={{ headerShown: false }} name={STACK_ROUTES.SEARCH.stack} component={SearchScreen} />
             <Tab.Screen
               options={{ headerShown: false }}
               name={STACK_ROUTES.CART.stack}
               component={CartStackNavigator}
             />
-            <Tab.Screen
-              options={{ headerShown: false }}
-              name={STACK_ROUTES.PROFILE.stack}
-              component={ProfileScreen}
-            />
+            <Tab.Screen options={{ headerShown: false }} name={STACK_ROUTES.PROFILE.stack} component={ProfileScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </PaperProvider>
@@ -108,5 +94,8 @@ const styles = StyleSheet.create({
   },
   ScrollContainer: {
     flex: 1,
+  },
+  statusBar: {
+    borderRadius: 400,
   },
 })

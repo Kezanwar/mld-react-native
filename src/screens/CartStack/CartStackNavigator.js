@@ -20,7 +20,7 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
           justifyContent: 'center',
         }}
       >
-        {cart?.length > 0 &&
+        {/* {cart?.length > 0 &&
           cart.map((item) => {
             return useMemo(() => (
               <View
@@ -34,18 +34,14 @@ const CartStackNavigator = ({ removeFromCart, cart }) => {
                 </Button>
               </View>
             ))
-          })}
+          })} */}
       </ScrollView>
     )
   }
 
   return (
     <CartStack.Navigator>
-      <CartStack.Screen
-        options={{ headerShown: false }}
-        name={STACK_ROUTES.CART.index}
-        component={CartScreen}
-      />
+      <CartStack.Screen options={{ headerShown: false }} name={STACK_ROUTES.CART.index} component={CartScreen} />
     </CartStack.Navigator>
   )
 }

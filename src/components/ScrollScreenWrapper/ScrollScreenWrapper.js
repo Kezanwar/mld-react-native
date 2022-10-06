@@ -5,14 +5,7 @@ import { colors } from '../../utils/colors'
 
 const ScrollScreenWrapper = ({ children, additionalStyles }) => {
   return (
-    <ScrollView
-      style={[
-        styles.scrollScreenWrapper,
-        additionalStyles ? additionalStyles : '',
-      ]}
-    >
-      {children}
-    </ScrollView>
+    <ScrollView style={[styles.scrollScreenWrapper, additionalStyles ? additionalStyles : '']}>{children}</ScrollView>
   )
 }
 

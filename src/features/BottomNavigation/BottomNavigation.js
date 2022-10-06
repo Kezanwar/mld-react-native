@@ -34,6 +34,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
     }
 
     let icon = ''
+    let cartCount = 0
     switch (item.name) {
       case STACK_ROUTES.HOME.stack:
         icon = 'home'
@@ -43,6 +44,8 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
         break
       case STACK_ROUTES.CART.stack:
         icon = 'basket'
+        const cartArr = Object.values(cart)
+        cartCount = cartArr.reduce((prev, current) => prev + current.count, cartCount)
         break
       case STACK_ROUTES.PROFILE.stack:
         icon = 'account'
@@ -66,7 +69,7 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
         />
         {item.name === STACK_ROUTES.CART.stack && (
           <View style={styles.cartBadgeContainer}>
-            <Text style={styles.cartBadge}>{cart.length}</Text>
+            <Text style={styles.cartBadge}>{cartCount}</Text>
           </View>
         )}
       </View>
@@ -76,14 +79,10 @@ const BottomNavigation = ({ state, descriptors, navigation, cart }) => {
   return useMemo(
     () => (
       <View>
-        <FlatList
-          contentContainerStyle={styles.contentWrapperContainer}
-          data={state.routes}
-          renderItem={TabItem}
-        />
+        <FlatList contentContainerStyle={styles.contentWrapperContainer} data={state.routes} renderItem={TabItem} />
       </View>
     ),
-    [cart.length, state.history]
+    [cart, state.history]
   )
 }
 
@@ -100,6 +99,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.3,
     shadowRadius: 12,
+    minHeight: 120,
   },
   buttonWrapperStyles: {
     flex: 1,

@@ -17,13 +17,11 @@ const CustomAddToCartBtn = ({ addToCart, productToAdd, quantity }) => {
     color: colors.d_grey,
   })
 
-  console.log(quantity)
-
-  // productToAdd is used as a enabled/disabled source of truth for the add to cart
+  // productToAdd and Quanitity are used as a enabled/disabled source of truth for the add to cart
 
   const handleAddToCart = useCallback(() => {
     if (quantity < 1 || !productToAdd) return
-    addToCart(productToAdd)
+    addToCart(productToAdd, quantity)
     if (addToCartButtonData.icon !== 'check-circle') {
       setAddToCartButtonData({
         icon: 'check-circle',
