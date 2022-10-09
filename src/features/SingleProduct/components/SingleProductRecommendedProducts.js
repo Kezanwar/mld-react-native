@@ -35,8 +35,6 @@ const SingleProductRecommendedProducts = ({ navigation, stack }) => {
     }
   }
 
-  console.log(context)
-
   useFocusEffect(
     React.useCallback(() => {
       if (context?.id === context?.paramsId && !recommendedLoading) fetchRecommended()

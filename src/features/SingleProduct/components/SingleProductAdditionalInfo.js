@@ -5,7 +5,6 @@ import SingleProductContext from '../SingleProductContext'
 
 const SingleProductAdditionalInfo = ({ destrProps }) => {
   const context = useContext(SingleProductContext)
-  console.log(context)
 
   return <View>{/* <Text>SingleProductAdditionalInfo</Text> */}</View>
 }
