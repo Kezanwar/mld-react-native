@@ -6,10 +6,14 @@ import { ActivityIndicator } from 'react-native-paper'
 import { colors } from '../../utils/colors'
 
 const Loading = () => {
-  return <ActivityIndicator animating={true} color={colors.mld_red} />
+  return <ActivityIndicator style={styles.loadingStyle} animating={true} color={colors.m_grey} />
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  loadingStyle: {
+    opacity: 0.3,
+  },
+})
 
 Loading.propTypes = {}
 
