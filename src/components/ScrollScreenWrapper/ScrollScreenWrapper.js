@@ -3,9 +3,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { colors } from '../../utils/colors'
 
-const ScrollScreenWrapper = ({ children, additionalStyles }) => {
+const ScrollScreenWrapper = ({ children, additionalStyles, forwardRef }) => {
   return (
-    <ScrollView style={[styles.scrollScreenWrapper, additionalStyles ? additionalStyles : '']}>{children}</ScrollView>
+    <ScrollView ref={forwardRef} style={[styles.scrollScreenWrapper, additionalStyles ? additionalStyles : '']}>
+      {children}
+    </ScrollView>
   )
 }
 

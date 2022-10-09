@@ -9,15 +9,8 @@ import { colors } from '../../utils/colors'
 const BackButton = ({ variant }) => {
   const navigate = useNavigation()
   return (
-    <TouchableOpacity
-      style={variant === 'inPill' ? styles.backButtonContainer : {}}
-      onPress={() => navigate.goBack()}
-    >
-      <AntDesign
-        name="arrowleft"
-        size={variant === 'inPill' ? 14 : 16}
-        color={colors.d_grey}
-      />
+    <TouchableOpacity style={variant === 'inPill' ? styles.backButtonContainer : {}} onPress={() => navigate.goBack()}>
+      <AntDesign name="arrowleft" size={variant === 'inPill' ? 14 : 16} color={colors.d_grey} />
     </TouchableOpacity>
   )
 }

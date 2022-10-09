@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import React, { useCallback } from 'react'
 import { colors } from '../../utils/colors'
 import { fontSizes, spacing } from '../../utils/sizes'
@@ -13,9 +7,8 @@ import PropTypes from 'prop-types'
 import { getPrices } from '../../utils/prices'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
-const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
-  const { id, name, short_description, prices, store, images, is_in_stock } =
-    prod
+const ProductCarouselCard = ({ dimensions, prod, stack, navigation, sameScreenNavigate }) => {
+  const { id, name, short_description, prices, store, images, is_in_stock } = prod
   const { price_range } = prices
 
   const getDynamicFontSize = useCallback(() => {
@@ -23,26 +16,19 @@ const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
     else return {}
   }, [])
 
+  const navigateToProduct = () => {
+    if (sameScreenNavigate) navigation.push(STACK_ROUTES[stack].single_product, { id: id })
+    else navigation.navigate(STACK_ROUTES[stack].single_product, { id: id })
+  }
+
   return (
-    <TouchableWithoutFeedback
-      onPress={() =>
-        navigation.navigate(STACK_ROUTES[stack].single_product, { id: id })
-      }
-    >
-      <View
-        style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}
-      >
+    <TouchableWithoutFeedback onPress={() => navigateToProduct()}>
+      <View style={[styles.carouselCardWrapper, { width: dimensions.width * 0.75 }]}>
         {images && images[0] && (
-          <Image
-            style={[styles.productImage, { height: dimensions.height * 0.375 }]}
-            source={{ uri: images[0] }}
-          />
+          <Image style={[styles.productImage, { height: dimensions.height * 0.375 }]} source={{ uri: images[0] }} />
         )}
 
-        <Text
-          numberOfLines={2}
-          style={[styles.productTitle, getDynamicFontSize()]}
-        >
+        <Text numberOfLines={2} style={[styles.productTitle, getDynamicFontSize()]}>
           {name}
         </Text>
         <Text style={styles.price_range}>{getPrices(prices, is_in_stock)}</Text>
@@ -50,19 +36,8 @@ const ProductCarouselCard = ({ dimensions, prod, stack, navigation }) => {
         <View style={styles.storeDetailsContainer}>
           <Image style={styles.shopGravatar} source={{ uri: store.gravatar }} />
           <View style={styles.storeNameContainer}>
-            <Text
-              style={[
-                styles.storeName,
-                { color: colors.m_grey, marginRight: 5 },
-              ]}
-            >
-              By
-            </Text>
-            <Text
-              style={[styles.storeName, { textDecorationLine: 'underline' }]}
-            >
-              {store.shop_name}
-            </Text>
+            <Text style={[styles.storeName, { color: colors.m_grey, marginRight: 5 }]}>By</Text>
+            <Text style={[styles.storeName, { textDecorationLine: 'underline' }]}>{store.shop_name}</Text>
           </View>
         </View>
       </View>
@@ -135,6 +110,7 @@ ProductCarouselCard.propTypes = {
   prod: PropTypes.object,
   dimensions: PropTypes.object,
   addToCart: PropTypes.func,
+  sameScreenNavigate: PropTypes.bool,
 }
 
 export default ProductCarouselCard

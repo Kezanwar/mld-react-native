@@ -6,25 +6,28 @@ import ProductCarouselCard from './ProductCarouselCard'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
-const ProductCarousel = ({ navigation, title, products, stack, slug }) => {
+const ProductCarousel = ({ navigation, title, products, stack, slug, sameScreenNavigate }) => {
   return useMemo(() => {
     const dimensions = Dimensions.get('window')
-    const forwardProps = { stack, navigation }
+    const forwardProps = { stack, navigation, sameScreenNavigate }
     return (
       <View style={styles.carouselWrapper}>
-        <ProductSectionTitle
-          slug={slug}
-          navigateTo={
-            products
-              ? {
-                  route: STACK_ROUTES[stack].single_product,
-                  params: { slug: products.slug },
-                }
-              : null
-          }
-          navigation={navigation}
-          title={title}
-        />
+        {title ? (
+          <ProductSectionTitle
+            slug={slug}
+            navigateTo={
+              products
+                ? {
+                    route: STACK_ROUTES[stack].single_product,
+                    params: { slug: products.slug },
+                  }
+                : null
+            }
+            navigation={navigation}
+            title={title}
+          />
+        ) : null}
+
         <ScrollView
           snapToAlignment={'left'}
           snapToInterval={dimensions.width * 0.75 + spacing.m}
@@ -36,12 +39,7 @@ const ProductCarousel = ({ navigation, title, products, stack, slug }) => {
           {products &&
             products.map((prod) => {
               return (
-                <ProductCarouselCard
-                  key={`product-${prod.id}`}
-                  dimensions={dimensions}
-                  prod={prod}
-                  {...forwardProps}
-                />
+                <ProductCarouselCard key={`product-${prod.id}`} dimensions={dimensions} prod={prod} {...forwardProps} />
               )
             })}
         </ScrollView>
@@ -68,9 +66,10 @@ const styles = StyleSheet.create({
 ProductCarousel.propTypes = {
   navigation: PropTypes.object.isRequired,
   stack: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   slug: PropTypes.string,
+  sameScreenNavigate: PropTypes.bool,
 }
 
 export default ProductCarousel
