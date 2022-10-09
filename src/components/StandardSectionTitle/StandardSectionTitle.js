@@ -5,8 +5,8 @@ import { fonts, textTransform } from '../../utils/fonts'
 import { fontSizes, spacing } from '../../utils/sizes'
 import { colors } from '../../utils/colors'
 
-const StandardSectionTitle = ({ text }) => {
-  return <Text style={styles.StandardSectionTitle}>{text}</Text>
+const StandardSectionTitle = ({ text, customStyles }) => {
+  return <Text style={[styles.StandardSectionTitle, customStyles ? customStyles : null]}>{text}</Text>
 }
 
 const styles = StyleSheet.create({

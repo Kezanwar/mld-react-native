@@ -6,29 +6,25 @@ import { STACKS } from '../../../constants/routes.constants'
 import { getHomeSingleProduct } from '../../../redux/actions/home.actions'
 import { useEffect } from 'react'
 import { colors } from '../../utils/colors'
-import { ActivityIndicator } from 'react-native-paper'
 import SingleProduct from '../../features/SingleProduct/SingleProduct'
+import Loading from '../../components/Loading/Loading'
+import { useFocusEffect } from '@react-navigation/native'
 
-const HomeSingleProductScreen = ({
-  route,
-  navigation,
-  getHomeSingleProduct,
-  state,
-}) => {
+const HomeSingleProductScreen = ({ route, navigation, getHomeSingleProduct, state }) => {
   const forwardProps = { navigation, stack: STACKS.HOME }
 
   const { id } = route?.params
 
   const { product, isLoading, error } = state
 
-  useEffect(() => {
-    if (id) getHomeSingleProduct(id)
-  }, [])
+  useFocusEffect(() => {
+    if (id !== product.id && !isLoading) getHomeSingleProduct(id)
+  })
 
   if (isLoading) {
     return (
       <View style={styles.screenWrapper}>
-        <ActivityIndicator animating={true} color={colors.mld_red} />
+        <Loading />
       </View>
     )
   }
@@ -38,7 +34,7 @@ const HomeSingleProductScreen = ({
         <Text>error text</Text>
       </View>
     )
-  } else return <SingleProduct {...forwardProps} product={product} />
+  } else return <SingleProduct {...forwardProps} paramsId={id} product={product} />
 }
 
 const styles = StyleSheet.create({
@@ -62,7 +58,4 @@ HomeSingleProductScreen.propTypes = {
   navigation: PropTypes.object,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeSingleProductScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeSingleProductScreen)

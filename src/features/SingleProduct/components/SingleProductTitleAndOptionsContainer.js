@@ -21,9 +21,9 @@ const SingleProductTitleAndOptionsContainer = () => {
           styles.singleProdBody,
           {
             color: colors.m_grey,
-            lineHeight: 21,
+            lineHeight: 24,
             marginBottom: 20,
-            fontSize: fontSizes.ml,
+            fontSize: fontSizes.ml + 4,
           },
         ]}
       >
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   singleProdTitle: {
     fontFamily: fonts.light,
-    fontSize: fontSizes.xl + 2,
+    fontSize: fontSizes.xl + 8,
     letterSpacing: -0.4,
     marginBottom: spacing.sm,
     textTransform: textTransform,
