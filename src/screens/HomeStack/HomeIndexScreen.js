@@ -18,6 +18,7 @@ import { Button } from 'react-native-paper'
 import { getCategories } from '../../../redux/actions/categories.actions'
 import ScrollScreenWrapper from '../../components/ScrollScreenWrapper/ScrollScreenWrapper'
 import SectionWrapper from '../../components/SectionWrapper/SectionWrapper'
+import { getRecentlyViewProducts, removeRecentlyViewedProducts } from '../../../async-storage/asyncStorage'
 
 const HomeIndexScreen = ({
   products,
@@ -37,6 +38,10 @@ const HomeIndexScreen = ({
     getCategories()
     getAllVendors()
   }, [])
+
+  useEffect(() => {
+    if (isFocused) getRecentlyViewProducts()
+  }, [isFocused])
 
   const forwardProps = {
     navigation,

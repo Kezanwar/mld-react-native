@@ -8,18 +8,21 @@ import { useEffect } from 'react'
 import { colors } from '../../utils/colors'
 import SingleProduct from '../../features/SingleProduct/SingleProduct'
 import Loading from '../../components/Loading/Loading'
-import { useFocusEffect } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 
 const HomeSingleProductScreen = ({ route, navigation, getHomeSingleProduct, state }) => {
   const forwardProps = { navigation, stack: STACKS.HOME }
 
   const { id } = route?.params
 
-  const { product, isLoading, error } = state
+  const { product, recommended_products, store_products, isLoading, error } = state
+  const isFocused = useIsFocused()
 
-  useFocusEffect(() => {
-    if (id !== product.id && !isLoading) getHomeSingleProduct(id)
-  })
+  useEffect(() => {
+    if (!isFocused) return
+    if (product?.id === id) return
+    else getHomeSingleProduct(id)
+  }, [isFocused])
 
   if (isLoading) {
     return (
@@ -34,7 +37,15 @@ const HomeSingleProductScreen = ({ route, navigation, getHomeSingleProduct, stat
         <Text>error text</Text>
       </View>
     )
-  } else return <SingleProduct {...forwardProps} paramsId={id} product={product} />
+  } else
+    return (
+      <SingleProduct
+        {...forwardProps}
+        product={product}
+        recommended_products={recommended_products}
+        store_products={store_products}
+      />
+    )
 }
 
 const styles = StyleSheet.create({

@@ -10,13 +10,13 @@ import SingleProductContext from './SingleProductContext'
 import SingleProductAdditionalInfo from './components/SingleProductAdditionalInfo'
 import SingleProductRecommendedProducts from './components/SingleProductRecommendedProducts'
 
-const SingleProduct = ({ paramsId, product, navigation, stack }) => {
+const SingleProduct = ({ product, recommended_products, store_products, navigation, stack }) => {
   const forwardProps = { navigation, stack }
 
   if (!product) return <ErrorMessage />
 
   return (
-    <SingleProductContext.Provider value={{ ...product, paramsId }}>
+    <SingleProductContext.Provider value={{ ...product, recommended_products, store_products }}>
       <ScrollScreenWrapper>
         <SingleProductImageCarousel />
         <SingleProductTitleAndOptionsContainer />
