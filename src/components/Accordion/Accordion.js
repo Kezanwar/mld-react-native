@@ -17,9 +17,7 @@ const Accordion = ({ destrProps }) => {
   return (
     <>
       <Animated.View style={[styles.box, animatedStyles]} />
-      <Button
-        onPress={() => (offset.value === 100 ? (offset.value = withTiming(0)) : (offset.value = withSpring(100)))}
-      >
+      <Button onPress={() => (offset.value !== 0 ? (offset.value = withTiming(0)) : (offset.value = withSpring(100)))}>
         click
       </Button>
     </>
