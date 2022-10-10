@@ -6,34 +6,26 @@ import StandardSectionTitle from '../../components/StandardSectionTitle/Standard
 import { spacing } from '../../utils/sizes'
 
 const VendorCarousel = ({ title, vendors }) => {
-  return useMemo(() => {
-    const dimensions = Dimensions.get('window')
-    return (
-      <View style={styles.carouselWrapper}>
-        <StandardSectionTitle text={title} />
-        <ScrollView
-          snapToAlignment={'left'}
-          snapToInterval={dimensions.width * 0.85 + spacing.m}
-          decelerationRate={0}
-          style={styles.scrollView}
-          alwaysBounceHorizontal
-          horizontal
-        >
-          {vendors
-            ? vendors.map((vendor, i) => {
-                return (
-                  <VendorCarouselCard
-                    key={`vendor-${vendor.id}-${i}`}
-                    dimensions={dimensions}
-                    vendor={vendor}
-                  />
-                )
-              })
-            : null}
-        </ScrollView>
-      </View>
-    )
-  }, [title, vendors])
+  const dimensions = Dimensions.get('window')
+  return (
+    <View style={styles.carouselWrapper}>
+      <StandardSectionTitle text={title} />
+      <ScrollView
+        snapToAlignment={'left'}
+        snapToInterval={dimensions.width * 0.85 + spacing.m}
+        decelerationRate={0}
+        style={styles.scrollView}
+        alwaysBounceHorizontal
+        horizontal
+      >
+        {vendors
+          ? vendors.map((vendor, i) => {
+              return <VendorCarouselCard key={`vendor-${vendor.id}-${i}`} dimensions={dimensions} vendor={vendor} />
+            })
+          : null}
+      </ScrollView>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -56,4 +48,4 @@ VendorCarousel.propTypes = {
   vendors: PropTypes.arrayOf(PropTypes.object),
 }
 
-export default VendorCarousel
+export default React.memo(VendorCarousel)

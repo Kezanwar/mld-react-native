@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import PropTypes from 'prop-types'
@@ -26,23 +20,16 @@ const CategoryCarouselCard = ({ navigation, dimensions, category, stack }) => {
 
   return (
     <TouchableWithoutFeedback onPress={handleNavigateAndSetState}>
-      <View
-        style={[styles.carouselCardWrapper, { width: dimensions.width * 0.8 }]}
-      >
+      <View style={[styles.carouselCardWrapper, { width: dimensions.width * 0.8 }]}>
         <Text style={styles.categoryTitle}>{name}</Text>
         <Text style={styles.categoryDescription}>
-          The confectionery industry is a group of large companies around the
-          world that produce various types of chocolate, chewing gum, and candy
+          The confectionery industry is a group of large companies around the world that produce various types of
+          chocolate, chewing gum, and candy
         </Text>
         <View style={styles.viewAllWrapper}>
           <View style={[styles.viewAllWrapper]}>
             <Text style={styles.viewAllText}>view all</Text>
-            <AntDesign
-              style={styles.arrowIcon}
-              name="arrowright"
-              size={26}
-              color={colors.mld_red}
-            />
+            <AntDesign style={styles.arrowIcon} name="arrowright" size={26} color={colors.mld_red} />
           </View>
           <Image style={styles.categoryIcon} source={{ uri: icon }} />
         </View>
@@ -106,4 +93,4 @@ CategoryCarouselCard.propTypes = {
   dimensions: PropTypes.object,
 }
 
-export default CategoryCarouselCard
+export default React.memo(CategoryCarouselCard)
