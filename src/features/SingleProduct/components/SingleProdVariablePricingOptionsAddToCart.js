@@ -16,9 +16,9 @@ import { useContext } from 'react'
 import SingleProductContext from '../SingleProductContext'
 
 const SingleProdVariablePricingOptionsAddToCart = () => {
-  if (!SingleProductContext) return null
-
   const { id, name, prices, has_options, variations, is_in_stock, attributes } = useContext(SingleProductContext)
+
+  if (!id) return null
 
   const [selectedAttributes, setSelectedAttributes] = useState(
     attributes && attributes.length > 0

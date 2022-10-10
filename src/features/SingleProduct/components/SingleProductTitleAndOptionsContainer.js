@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   singleProdTitleContainer: {
     backgroundColor: colors.l_grey,
     paddingHorizontal: 15,
-    paddingTop: 20,
+    paddingTop: 25,
+    paddingBottom: 5,
     borderTopStartRadius: 12,
     borderTopEndRadius: 12,
     borderRadius: 20,
