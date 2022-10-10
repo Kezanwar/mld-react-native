@@ -1,50 +1,40 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native'
+import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import MasonryList from '@react-native-seoul/masonry-list'
 import ProductSectionTitle from '../../components/ProductSectionTitle/ProductSectionTitle'
 
 import { colors } from '../../utils/colors'
 import { fonts, textTransform } from '../../utils/fonts'
 import { fontSizes } from '../../utils/sizes'
-import { correctPriceWithCurrency, getPrices } from '../../utils/prices'
+import { getPrices } from '../../utils/prices'
 import { STACK_ROUTES } from '../../../constants/routes.constants'
 
 const ProductMasonryGrid = ({ stack, products, title, slug, navigation }) => {
-  return useMemo(() => {
-    const forwardProps = { navigation, stack }
-    return (
-      <View style={styles.masonryContainer}>
-        <ProductSectionTitle
-          slug={slug}
-          navigateTo={
-            products
-              ? {
-                  route: STACK_ROUTES[stack].category,
-                  params: { slug: products.slug },
-                }
-              : null
-          }
-          navigation={navigation}
-          title={title}
-        />
-        <MasonryList
-          numColumns={2}
-          data={products.slice(6, 12)}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item, i }) => (
-            <GridItem {...forwardProps} index={i} item={item} />
-          )}
-        />
-      </View>
-    )
-  }, [products, title, stack, slug])
+  const forwardProps = { navigation, stack }
+  return (
+    <View style={styles.masonryContainer}>
+      <ProductSectionTitle
+        slug={slug}
+        navigateTo={
+          products
+            ? {
+                route: STACK_ROUTES[stack].category,
+                params: { slug: products.slug },
+              }
+            : null
+        }
+        navigation={navigation}
+        title={title}
+      />
+      <MasonryList
+        numColumns={2}
+        data={products.slice(6, 12)}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, i }) => <GridItem {...forwardProps} index={i} item={item} />}
+      />
+    </View>
+  )
 }
 
 const GridItem = ({ index, item, navigation, stack }) => {
@@ -66,17 +56,10 @@ const GridItem = ({ index, item, navigation, stack }) => {
 
   return (
     <>
-      <TouchableWithoutFeedback
-        onPress={() =>
-          navigation.navigate(STACK_ROUTES[stack].single_product, { id })
-        }
-      >
+      <TouchableWithoutFeedback onPress={() => navigation.navigate(STACK_ROUTES[stack].single_product, { id })}>
         <View style={[styles.masonryGridItem, removeFirstTwoMarginTop(index)]}>
           {images && images[0] && images[0] && (
-            <Image
-              style={[styles.productImage, { height: heights[0] }]}
-              source={{ uri: images[0] }}
-            />
+            <Image style={[styles.productImage, { height: heights[0] }]} source={{ uri: images[0] }} />
           )}
           <View style={styles.productTitleWrapper}>
             <Text numberOfLines={3} style={styles.productTitle}>
@@ -84,9 +67,7 @@ const GridItem = ({ index, item, navigation, stack }) => {
             </Text>
           </View>
 
-          <Text style={styles.productPrices}>
-            {getPrices(prices, is_in_stock)}
-          </Text>
+          <Text style={styles.productPrices}>{getPrices(prices, is_in_stock)}</Text>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.productStoreDetailsContainer}>
@@ -100,11 +81,7 @@ const GridItem = ({ index, item, navigation, stack }) => {
           By
         </Text>
         <Text
-          style={[
-            styles.productStoreName,
-            { textDecorationLine: 'underline' },
-            getDynamicFontSize(store.shop_name),
-          ]}
+          style={[styles.productStoreName, { textDecorationLine: 'underline' }, getDynamicFontSize(store.shop_name)]}
         >
           {store.shop_name}
         </Text>
@@ -182,4 +159,4 @@ ProductMasonryGrid.propTypes = {
   addToCart: PropTypes.func,
 }
 
-export default ProductMasonryGrid
+export default React.memo(ProductMasonryGrid)
