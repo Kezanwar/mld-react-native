@@ -5,29 +5,18 @@ import Pill from '../Pill/Pill'
 import { v4 } from 'uuid'
 
 const PillList = ({ pills }) => {
+  if (!pills) return null
   const sortedPills = pills?.sort((a, b) => {
     // ASC  -> a.length - b.length
     // DESC -> b.length - a.length
     return a.name.length - b.name.length
   })
-  return useMemo(
-    () =>
-      sortedPills?.length > 0 ? (
-        <View style={styles.pillsWrapper}>
-          {pills.map((pill) => {
-            return (
-              <Pill
-                shouldFlexGrow={sortedPills.length > 1}
-                key={pill.id}
-                item={pill}
-              />
-            )
-          })}
-        </View>
-      ) : (
-        ''
-      ),
-    []
+  return (
+    <View style={styles.pillsWrapper}>
+      {pills.map((pill) => {
+        return <Pill shouldFlexGrow={sortedPills.length > 1} key={pill.id} item={pill} />
+      })}
+    </View>
   )
 }
 
@@ -44,4 +33,4 @@ PillList.propTypes = {
   pills: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default PillList
+export default React.memo(PillList)
