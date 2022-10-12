@@ -9,31 +9,19 @@ import { fonts, textTransform } from '../../utils/fonts'
 
 import { connect } from 'react-redux'
 import PillList from '../../components/PillList/PillList'
+import { getLocation } from '../../utils/vendor'
 
 const VendorCarouselCard = ({ dimensions, vendor }) => {
   const { store_name, gravatar, banner, categories, address } = vendor
-
-  const getLocation = () => {
-    let country = address.country
-    if (country === 'GB') country = 'UK'
-    const { city, state } = address
-    if (!city) return `${country}`
-    else return `${city} - ${country}`
-  }
   return (
-    <View
-      style={[styles.carouselCardWrapper, { width: dimensions.width * 0.85 }]}
-    >
+    <View style={[styles.carouselCardWrapper, { width: dimensions.width * 0.85 }]}>
       {banner ? (
-        <Image
-          style={[styles.vendorImage, { height: dimensions.height * 0.35 }]}
-          source={{ uri: banner }}
-        />
+        <Image style={[styles.vendorImage, { height: dimensions.height * 0.35 }]} source={{ uri: banner }} />
       ) : null}
       <Text numberOfLines={2} style={styles.vendorTitle}>
         {store_name}
       </Text>
-      <Text style={styles.vendorLocation}>{getLocation()}</Text>
+      <Text style={styles.vendorLocation}>{getLocation(address)}</Text>
       <PillList pills={categories} />
     </View>
   )

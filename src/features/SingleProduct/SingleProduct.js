@@ -7,8 +7,8 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import SingleProductImageCarousel from './components/SingleProductImageCarousel'
 import SingleProductTitleAndOptionsContainer from './components/SingleProductTitleAndOptionsContainer'
 import SingleProductContext from './SingleProductContext'
-import SingleProductAdditionalInfo from './components/SingleProductAdditionalInfo'
 import SingleProductRecommendedProducts from './components/SingleProductRecommendedProducts'
+import SingleProductStoreInfo from './components/SingleProductStoreInfo'
 
 const SingleProduct = ({ product, recommended_products, store_products, navigation, stack }) => {
   const forwardProps = { navigation, stack }
@@ -20,7 +20,7 @@ const SingleProduct = ({ product, recommended_products, store_products, navigati
       <ScrollScreenWrapper>
         <SingleProductImageCarousel />
         <SingleProductTitleAndOptionsContainer />
-        <SingleProductAdditionalInfo />
+        <SingleProductStoreInfo {...forwardProps} />
         <SingleProductRecommendedProducts {...forwardProps} />
       </ScrollScreenWrapper>
     </SingleProductContext.Provider>

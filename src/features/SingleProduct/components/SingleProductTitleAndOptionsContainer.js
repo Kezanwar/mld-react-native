@@ -11,6 +11,7 @@ import SingleProductContext from '../SingleProductContext'
 import { useWindowDimensions } from 'react-native'
 import RenderHtml from 'react-native-render-html'
 import { base_styles, description_styles } from '../../../utils/renderHtmlStyles'
+import Divider from '../../../components/Divider/Divider'
 
 const SingleProductTitleAndOptionsContainer = () => {
   const { name, short_description, has_options } = useContext(SingleProductContext)
@@ -30,6 +31,7 @@ const SingleProductTitleAndOptionsContainer = () => {
         />
         {/* {short_description} */}
       </View>
+      <Divider styleOverride={{ marginBottom: 30, marginTop: 10 }} />
       {has_options ? <SingleProdVariablePricingOptionsAddToCart /> : <SingleProdSimplePricingOptionsAddToCart />}
     </View>
   )
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     textTransform: textTransform,
   },
   singleProdBody: {
-    marginBottom: 10,
+    // marginBottom: 10,
   },
 })
 

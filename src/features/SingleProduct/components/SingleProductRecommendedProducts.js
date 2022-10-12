@@ -14,14 +14,6 @@ const SingleProductRecommendedProducts = ({ navigation, stack }) => {
 
   return (
     <View style={styles.singleProdRecommendedProducts}>
-      <StandardSectionTitle customStyles={styles.sectionTitleCustomStyles} text={`More from ${store.shop_name} `} />
-
-      {store_products ? (
-        <ProductCarousel sameScreenNavigate={true} {...forwardProps} products={store_products} />
-      ) : (
-        <Loading />
-      )}
-
       <StandardSectionTitle customStyles={styles.sectionTitleCustomStyles} text="Recommended products" />
       {recommended_products ? (
         <ProductCarousel sameScreenNavigate={true} {...forwardProps} products={recommended_products} />
@@ -34,10 +26,10 @@ const SingleProductRecommendedProducts = ({ navigation, stack }) => {
 
 const styles = StyleSheet.create({
   singleProdRecommendedProducts: {
-    marginTop: 30,
+    marginTop: 10,
   },
   sectionTitleCustomStyles: {
-    fontSize: fontSizes.xxl,
+    fontSize: fontSizes.xl,
     marginBottom: 0,
     marginLeft: 4,
   },
