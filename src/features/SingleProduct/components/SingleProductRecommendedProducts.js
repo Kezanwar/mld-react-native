@@ -4,6 +4,7 @@ import SingleProductContext from '../SingleProductContext'
 import ProductCarousel from '../../ProductCarousel/ProductCarousel'
 import StandardSectionTitle from '../../../components/StandardSectionTitle/StandardSectionTitle'
 import Loading from '../../../components/Loading/Loading'
+import { fontSizes } from '../../../utils/sizes'
 
 const SingleProductRecommendedProducts = ({ navigation, stack }) => {
   const context = useContext(SingleProductContext)
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   sectionTitleCustomStyles: {
-    fontSize: 44,
+    fontSize: fontSizes.xxl,
     marginBottom: 0,
     marginLeft: 4,
   },

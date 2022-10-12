@@ -14,14 +14,15 @@ const SingleProductAdditionalInfo = ({ destrProps }) => {
   if (!context) return null
   console.log(context)
   const getDynamicFontSize = useMemo(() => {
-    if (context.store.shop_name.length > 16) return { fontSize: 15 }
+    if (context.store.shop_name.length > 16) return { fontSize: 26 }
     else return {}
-  }, [])
+  }, [context.store.shop_name])
   return (
     <View>
+      <Text>vendor info</Text>
       <View style={styles.productStoreDetailsContainer}>
         <Image style={styles.shopGravatar} source={{ uri: context.store.gravatar }} />
-        <Text style={[styles.productStoreName, { color: colors.m_grey, marginRight: 5 }, getDynamicFontSize]}>By</Text>
+
         <Text style={[styles.productStoreName, { textDecorationLine: 'underline' }, getDynamicFontSize]}>
           {context.store.shop_name}
         </Text>

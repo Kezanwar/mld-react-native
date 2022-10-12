@@ -8,27 +8,28 @@ import SingleProdVariablePricingOptionsAddToCart from './SingleProdVariablePrici
 import SingleProdSimplePricingOptionsAddToCart from './SingleProdSimplePricingOptionsAddToCart'
 import { useContext } from 'react'
 import SingleProductContext from '../SingleProductContext'
+import { useWindowDimensions } from 'react-native'
+import RenderHtml from 'react-native-render-html'
+import { base_styles, description_styles } from '../../../utils/renderHtmlStyles'
 
 const SingleProductTitleAndOptionsContainer = () => {
   const { name, short_description, has_options } = useContext(SingleProductContext)
-
   if (!name || !short_description) return null
+  const { width } = useWindowDimensions()
+  console.log(short_description)
   return (
     <View style={styles.singleProdTitleContainer}>
       <Text style={styles.singleProdTitle}>{name}</Text>
-      <Text
-        style={[
-          styles.singleProdBody,
-          {
-            color: colors.m_grey,
-            lineHeight: 24,
-            marginBottom: 20,
-            fontSize: fontSizes.ml + 4,
-          },
-        ]}
-      >
-        {short_description}
-      </Text>
+      <View style={styles.singleProdBody}>
+        <RenderHtml
+          tagsStyles={description_styles}
+          contentWidth={width}
+          source={{ html: short_description }}
+          systemFonts={[fonts.light]}
+          enableExperimentalGhostLinesPrevention={true}
+        />
+        {/* {short_description} */}
+      </View>
       {has_options ? <SingleProdVariablePricingOptionsAddToCart /> : <SingleProdSimplePricingOptionsAddToCart />}
     </View>
   )
@@ -53,12 +54,7 @@ const styles = StyleSheet.create({
     textTransform: textTransform,
   },
   singleProdBody: {
-    color: colors.mld_red,
-    fontFamily: fonts.light,
-    fontSize: fontSizes.lg,
-    letterSpacing: -0.4,
-    marginBottom: spacing.m,
-    textTransform: textTransform,
+    marginBottom: 10,
   },
 })
 
